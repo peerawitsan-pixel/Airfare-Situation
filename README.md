@@ -1,4 +1,4 @@
-# ✈️ Geopolitical Oil Shocks & Airline Ticket Price Dynamics (2019 – 2026)
+# Geopolitical Oil Shocks & Airline Ticket Price Dynamics (2019 – 2026)
 
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
 [![Pandas](https://img.shields.io/badge/Pandas-2.0%2B-150458.svg)](https://pandas.pydata.org/)
