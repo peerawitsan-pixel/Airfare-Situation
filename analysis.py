@@ -40,7 +40,6 @@ for name, df in [("oil_jet_fuel", oil), ("conflict_events", events),
                  ("fuel_surcharges", surcharges), ("route_costs", routes)]:
     print(f"  {name:22s}: {df.shape[0]:7,} rows x {df.shape[1]} cols")
 
-# ─────────────────────────────────────────────────────────────────────────────
 # 2. EDA
 # ─────────────────────────────────────────────────────────────────────────────
 print("\n" + "=" * 60)
