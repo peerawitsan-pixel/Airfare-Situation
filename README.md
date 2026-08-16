@@ -62,8 +62,8 @@ The table below summarizes the key macroeconomic metrics across the three major 
 
 | Metric / Shock Feature | COVID-19 Collapse (Mar 2020) | Russia-Ukraine War (Mar 2022) | US-Iran War Crisis (Dec 2025) |
 | :--- | :---: | :---: | :---: |
-| **Baseline Crude Price ($T_0$)** | $\$61.7 /\text{bbl}$ | $\$67.3 /\text{bbl}$ | $\$92.6 /\text{bbl}$ |
-| **Peak Crude Price** | $\$26.6 /\text{bbl}$ (Demand Shock) | $\$117.6 /\text{bbl}$ | $\$169.1 /\text{bbl}$ |
+| **Baseline Crude Price ($T_0$)** | $61.7 /bbl | $67.3 /bbl | $92.6 /bbl |
+| **Peak Crude Price** | $26.6 /bbl  | $117.6 /bbl | $169.1 /bbl |
 | **Peak Crude Price Change ($\Delta\%$)** | $-57.2\%$ | $+74.8\%$ | $+82.6\%$ |
 | **Peak Ticket Fare Change ($\Delta\%$)** | $-56.5\%$ | $+34.5\%$ | $+154.4\%$ |
 | **Peak Pass-Through Rate ($PT$)** | $0.987$ | $0.460$ | **$1.869$** |
