@@ -20,8 +20,8 @@ This project examines **90 months of time-series data (Jan 2019 – Jun 2026)** 
 ### 🌟 Key Findings
 1. **Immediate Transmission Speed (0–1 Month Lag):** Statistical cross-correlation reveals that airfares respond to crude oil price shocks with **minimal lag (0–1 month, $r = +0.400, p < 0.001$)**. Fuel surcharges allow airlines to quickly adjust total ticket costs before quarterly base fare revisions occur.
 2. **Asymmetric & Amplified Pass-Through in Crisis:**
-   - **Russia-Ukraine War (2022):** Oil spiked $+74.8\%$ to peak at $117.6/bbl, yielding a peak airfare rise of $+34.5\%$ (Pass-Through Rate $= 0.460$).
-   - **US-Iran War Crisis (2025–2026):** Blockade of the Strait of Hormuz caused Brent crude to surge $+82.6\%$ (reaching $169.1/bbl peak). Airfares surged $+154.4\%$, resulting in an unprecedented peak **Pass-Through Rate of $1.869$**.
+   - **Russia-Ukraine War (2022):** Oil spiked +74.8$ to peak at $117.6/bbl, yielding a peak airfare rise of +34.5$ (Pass-Through Rate $= 0.460$).
+   - **US-Iran War Crisis (2025–2026):** Blockade of the Strait of Hormuz caused Brent crude to surge +82.6$ (reaching $169.1/bbl peak). Airfares surged +154.4$, resulting in an unprecedented peak **Pass-Through Rate of $1.869$**.
 3. **Business Model Heterogeneity:** **Full-Service Flag Carriers (FSC)** pass through fuel costs faster and more aggressively via standardized fuel surcharges, preserving profit margins better than **Low-Cost Carriers (LCC)**, which suffer margin compression due to price sensitivity on short-haul routes.
 4. **Severe Profitability Contraction:** During extreme shocks (e.g., US-Iran War), average airline net profit margins collapsed to **$-32.4\%$**, driven by record jet fuel prices ($200/bbl), flight rerouting costs around closed Middle Eastern airspaces, and suppressed demand.
 
