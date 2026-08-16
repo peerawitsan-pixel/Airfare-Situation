@@ -15,7 +15,7 @@
 
 Jet fuel represents one of the largest volatile operating costs for global airlines, historically accounting for **25% to 40% of operational expenses (OpEx)**. When geopolitical shocks destabilize global crude oil supply, airline ticket prices experience rapid adjustments driven by base fare recalibrations and fuel surcharges.
 
-This project examines **90 months of time-series data (Jan 2019 – Jun 2026)** encompassing **39 major geopolitical conflict events**, **14,850 ticket price records across 33 global airlines**, **10,440 fuel surcharge records**, and **725 airline financial metrics**. 
+This project examines **90 months of time-series data (Jan 2019 – Jun 2026)** encompassing **4 major geopolitical conflict events**, **14,850 ticket price records across 33 global airlines**, **10,440 fuel surcharge records**, and **725 airline financial metrics**. 
 
 ### 🌟 Key Findings
 1. **Immediate Transmission Speed (0–1 Month Lag):** Statistical cross-correlation reveals that airfares respond to crude oil price shocks with **minimal lag (0–1 month, $r = +0.400, p < 0.001$)**. Fuel surcharges allow airlines to quickly adjust total ticket costs before quarterly base fare revisions occur.
