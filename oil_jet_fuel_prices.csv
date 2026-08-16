@@ -1,0 +1,91 @@
+month,conflict_phase,brent_crude_usd_barrel,jet_fuel_usd_barrel,refinery_margin_usd,jet_fuel_usd_per_gallon,wti_crude_usd_barrel,opec_production_mbd,us_strategic_reserve_mbl,strait_hormuz_disrupted,yoy_brent_change_pct,data_source
+2019-01,Pre-Pandemic Baseline,63.0,71.31,8.31,1.671,61.02,27.05,579.8,No,,EIA / Platts / IATA
+2019-02,Pre-Pandemic Baseline,67.61,80.55,12.94,1.844,65.49,28.07,520.8,No,,EIA / Platts / IATA
+2019-03,Pre-Pandemic Baseline,65.86,78.77,12.91,1.955,64.02,27.33,484.5,No,,EIA / Platts / IATA
+2019-04,Pre-Pandemic Baseline,64.79,76.2,11.41,1.883,63.16,27.68,614.7,No,,EIA / Platts / IATA
+2019-05,Pre-Pandemic Baseline,61.25,73.32,12.07,1.703,58.23,29.27,400.0,No,,EIA / Platts / IATA
+2019-06,Pre-Pandemic Baseline,61.25,71.62,10.37,1.733,58.19,27.04,503.0,No,,EIA / Platts / IATA
+2019-07,Pre-Pandemic Baseline,60.46,70.88,10.42,1.741,58.52,29.34,373.1,No,,EIA / Platts / IATA
+2019-08,Pre-Pandemic Baseline,66.93,77.82,10.89,1.863,64.19,29.12,496.5,No,,EIA / Platts / IATA
+2019-09,Pre-Pandemic Baseline,64.81,72.75,7.94,1.737,62.35,26.28,385.2,No,,EIA / Platts / IATA
+2019-10,Pre-Pandemic Baseline,65.66,74.25,8.59,1.722,63.54,25.78,402.1,No,,EIA / Platts / IATA
+2019-11,Pre-Pandemic Baseline,60.16,67.57,7.41,1.543,58.56,25.9,401.7,No,,EIA / Platts / IATA
+2019-12,Pre-Pandemic Baseline,67.76,80.2,12.44,1.985,63.71,25.57,545.3,No,,EIA / Platts / IATA
+2020-01,Pre-Pandemic Baseline,66.66,76.75,10.09,1.901,62.83,25.88,571.4,No,5.81,EIA / Platts / IATA
+2020-02,Pre-Pandemic Baseline,61.7,72.24,10.54,1.743,57.11,28.23,527.5,No,-8.74,EIA / Platts / IATA
+2020-03,COVID-19 Collapse,20.55,24.88,4.33,0.583,19.62,25.78,629.8,No,-68.8,EIA / Platts / IATA
+2020-04,COVID-19 Collapse,20.57,23.55,2.98,0.552,18.97,26.78,471.2,No,-68.25,EIA / Platts / IATA
+2020-05,COVID-19 Collapse,22.26,25.84,3.58,0.629,21.1,28.88,447.1,No,-63.66,EIA / Platts / IATA
+2020-06,COVID-19 Collapse,45.35,54.22,8.87,1.342,43.2,25.59,604.5,No,-25.96,EIA / Platts / IATA
+2020-07,COVID-19 Collapse,44.05,50.34,6.29,1.245,41.28,28.76,430.4,No,-27.14,EIA / Platts / IATA
+2020-08,COVID-19 Collapse,42.08,47.45,5.37,1.161,40.21,26.63,630.1,No,-37.13,EIA / Platts / IATA
+2020-09,COVID-19 Collapse,46.57,53.51,6.94,1.292,42.93,25.97,373.3,No,-28.14,EIA / Platts / IATA
+2020-10,COVID-19 Collapse,39.95,45.39,5.44,1.036,36.84,28.29,631.9,No,-39.16,EIA / Platts / IATA
+2020-11,COVID-19 Collapse,42.09,51.05,8.96,1.174,40.8,28.02,381.7,No,-30.04,EIA / Platts / IATA
+2020-12,COVID-19 Collapse,43.13,51.79,8.66,1.282,40.61,29.01,610.6,No,-36.35,EIA / Platts / IATA
+2021-01,COVID-19 Collapse,75.49,89.33,13.84,2.15,70.03,28.44,512.5,No,13.25,EIA / Platts / IATA
+2021-02,COVID-19 Collapse,83.06,100.27,17.21,2.27,79.02,28.71,638.1,No,34.62,EIA / Platts / IATA
+2021-03,COVID-19 Collapse,69.59,83.53,13.94,1.91,67.24,26.63,389.9,No,238.64,EIA / Platts / IATA
+2021-04,COVID-19 Collapse,76.83,87.48,10.65,2.117,71.68,26.21,519.5,No,273.51,EIA / Platts / IATA
+2021-05,COVID-19 Collapse,78.63,95.08,16.45,2.152,75.28,28.5,631.7,No,253.23,EIA / Platts / IATA
+2021-06,Recovery & Surge,66.07,77.56,11.49,1.784,61.12,28.73,511.2,No,45.69,EIA / Platts / IATA
+2021-07,Recovery & Surge,78.97,94.82,15.85,2.269,72.9,29.46,539.9,No,79.27,EIA / Platts / IATA
+2021-08,Recovery & Surge,68.92,83.37,14.45,2.023,65.6,27.15,557.9,No,63.78,EIA / Platts / IATA
+2021-09,Recovery & Surge,66.5,76.59,10.09,1.851,63.34,26.99,492.7,No,42.8,EIA / Platts / IATA
+2021-10,Recovery & Surge,86.82,98.19,11.37,2.273,83.19,28.61,539.4,No,117.32,EIA / Platts / IATA
+2021-11,Recovery & Surge,87.21,99.66,12.45,2.423,84.03,26.86,527.8,No,107.2,EIA / Platts / IATA
+2021-12,Recovery & Surge,83.59,97.19,13.6,2.253,81.8,29.22,613.3,No,93.81,EIA / Platts / IATA
+2022-01,Recovery & Surge,72.01,86.54,14.53,2.025,68.48,28.93,382.3,No,-4.61,EIA / Platts / IATA
+2022-02,Recovery & Surge,67.25,81.11,13.86,1.979,63.17,27.22,445.9,No,-19.03,EIA / Platts / IATA
+2022-03,Ukraine War Shock,117.58,131.77,14.19,3.184,113.78,29.38,626.6,No,68.96,EIA / Platts / IATA
+2022-04,Ukraine War Shock,109.53,128.27,18.74,3.161,102.55,29.4,610.4,No,42.56,EIA / Platts / IATA
+2022-05,Ukraine War Shock,99.03,115.05,16.02,2.782,93.72,26.46,493.0,No,25.94,EIA / Platts / IATA
+2022-06,Ukraine War Shock,111.34,127.17,15.83,3.049,102.96,30.06,537.4,No,68.52,EIA / Platts / IATA
+2022-07,Ukraine War Shock,80.69,91.34,10.65,2.086,74.36,28.27,444.9,No,2.18,EIA / Platts / IATA
+2022-08,Ukraine War Shock,98.19,113.29,15.1,2.662,96.01,29.72,420.8,No,42.47,EIA / Platts / IATA
+2022-09,Ukraine War Shock,85.18,103.43,18.25,2.405,82.64,27.44,495.2,No,28.09,EIA / Platts / IATA
+2022-10,Ukraine War Shock,93.25,107.45,14.2,2.493,89.68,30.03,465.4,No,7.41,EIA / Platts / IATA
+2022-11,Ukraine War Shock,86.23,101.05,14.82,2.52,81.45,27.75,527.6,No,-1.12,EIA / Platts / IATA
+2022-12,Ukraine War Shock,90.4,107.6,17.2,2.535,84.11,26.05,391.0,No,8.15,EIA / Platts / IATA
+2023-01,Stabilisation,84.29,97.47,13.18,2.412,78.34,30.07,633.1,No,17.05,EIA / Platts / IATA
+2023-02,Stabilisation,78.14,95.11,16.97,2.294,73.06,26.41,636.3,No,16.19,EIA / Platts / IATA
+2023-03,Stabilisation,91.48,111.26,19.78,2.727,87.18,27.44,558.5,No,-22.2,EIA / Platts / IATA
+2023-04,Stabilisation,88.18,100.98,12.8,2.405,84.91,30.28,514.7,No,-19.49,EIA / Platts / IATA
+2023-05,Stabilisation,90.97,106.41,15.44,2.553,87.3,30.28,453.6,No,-8.14,EIA / Platts / IATA
+2023-06,Stabilisation,90.21,103.75,13.54,2.468,84.51,28.58,589.7,No,-18.98,EIA / Platts / IATA
+2023-07,Stabilisation,85.16,97.8,12.64,2.258,83.23,28.84,554.9,No,5.54,EIA / Platts / IATA
+2023-08,Stabilisation,90.67,101.88,11.21,2.48,87.43,28.02,413.9,No,-7.66,EIA / Platts / IATA
+2023-09,Stabilisation,76.5,90.34,13.84,2.104,72.92,27.32,616.0,No,-10.19,EIA / Platts / IATA
+2023-10,Gaza-Israel Conflict,78.33,91.67,13.34,2.079,74.94,27.48,592.1,No,-16.0,EIA / Platts / IATA
+2023-11,Gaza-Israel Conflict,75.77,85.25,9.48,2.059,71.62,29.03,626.4,No,-12.13,EIA / Platts / IATA
+2023-12,Gaza-Israel Conflict,80.53,92.44,11.91,2.13,75.28,29.39,565.9,No,-10.92,EIA / Platts / IATA
+2024-01,Gaza-Israel Conflict,84.61,102.45,17.84,2.547,79.65,29.56,535.6,No,0.38,EIA / Platts / IATA
+2024-02,Gaza-Israel Conflict,82.61,94.5,11.89,2.352,79.76,29.55,482.9,No,5.72,EIA / Platts / IATA
+2024-03,Gaza-Israel Conflict,92.09,104.48,12.39,2.591,84.8,26.41,621.8,No,0.67,EIA / Platts / IATA
+2024-04,Gaza-Israel Conflict,84.06,98.26,14.2,2.309,77.92,28.22,603.8,No,-4.67,EIA / Platts / IATA
+2024-05,Gaza-Israel Conflict,82.78,100.87,18.09,2.285,76.39,26.26,382.2,No,-9.0,EIA / Platts / IATA
+2024-06,Gaza-Israel Conflict,87.23,99.81,12.58,2.478,80.46,28.47,377.1,No,-3.3,EIA / Platts / IATA
+2024-07,Gaza-Israel Conflict,80.4,95.45,15.05,2.256,78.09,27.99,471.6,No,-5.59,EIA / Platts / IATA
+2024-08,Gaza-Israel Conflict,91.64,109.62,17.98,2.732,88.18,29.99,588.8,No,1.07,EIA / Platts / IATA
+2024-09,Gaza-Israel Conflict,79.27,90.67,11.4,2.259,75.18,27.58,636.6,No,3.62,EIA / Platts / IATA
+2024-10,Gaza-Israel Conflict,94.78,113.06,18.28,2.787,87.75,26.53,410.6,No,21.0,EIA / Platts / IATA
+2024-11,Gaza-Israel Conflict,91.13,105.42,14.29,2.458,86.53,26.64,530.4,No,20.27,EIA / Platts / IATA
+2024-12,Pre-Iran Escalation,81.38,96.29,14.91,2.266,77.18,29.43,472.8,No,1.06,EIA / Platts / IATA
+2025-01,Pre-Iran Escalation,85.13,100.74,15.61,2.483,79.2,28.78,631.9,No,0.61,EIA / Platts / IATA
+2025-02,Pre-Iran Escalation,103.76,121.77,18.01,2.846,98.16,26.46,597.4,No,25.6,EIA / Platts / IATA
+2025-03,Pre-Iran Escalation,101.26,114.33,13.07,2.632,95.58,26.38,596.3,No,9.96,EIA / Platts / IATA
+2025-04,Pre-Iran Escalation,101.77,122.48,20.71,2.933,97.39,29.15,496.5,No,21.07,EIA / Platts / IATA
+2025-05,Pre-Iran Escalation,102.74,118.36,15.62,2.941,98.44,26.33,482.0,No,24.11,EIA / Platts / IATA
+2025-06,Pre-Iran Escalation,86.7,98.72,12.02,2.397,80.0,29.7,443.8,No,-0.61,EIA / Platts / IATA
+2025-07,Pre-Iran Escalation,93.24,104.81,11.57,2.513,87.88,29.18,385.2,No,15.97,EIA / Platts / IATA
+2025-08,Pre-Iran Escalation,87.66,103.36,15.7,2.362,83.94,26.37,603.5,No,-4.34,EIA / Platts / IATA
+2025-09,Pre-Iran Escalation,104.85,124.54,19.69,2.999,99.63,26.38,589.5,No,32.27,EIA / Platts / IATA
+2025-10,Pre-Iran Escalation,99.34,111.43,12.09,2.783,96.5,30.44,639.9,No,4.81,EIA / Platts / IATA
+2025-11,Pre-Iran Escalation,92.61,108.47,15.86,2.49,88.86,27.68,639.1,No,1.62,EIA / Platts / IATA
+2025-12,US-Iran War Conflict,122.22,139.65,17.43,3.331,113.64,27.67,520.0,Yes,50.18,EIA / Platts / IATA
+2026-01,US-Iran War Conflict,130.88,155.03,24.15,3.83,120.96,29.66,577.6,Yes,53.74,EIA / Platts / IATA
+2026-02,US-Iran War Conflict,155.73,177.13,21.4,4.319,149.27,30.26,625.1,Yes,50.09,EIA / Platts / IATA
+2026-03,US-Iran War Conflict,169.08,201.05,31.97,4.881,155.82,30.44,599.4,Yes,66.98,EIA / Platts / IATA
+2026-04,De-escalation & Negotiations,111.38,129.05,17.67,3.135,106.38,29.39,436.8,Yes,9.44,EIA / Platts / IATA
+2026-05,De-escalation & Negotiations,104.87,127.28,22.41,2.988,102.4,27.69,491.6,Yes,2.07,EIA / Platts / IATA
+2026-06,De-escalation & Negotiations,92.83,105.25,12.42,2.454,88.61,26.38,404.9,Yes,7.07,EIA / Platts / IATA
