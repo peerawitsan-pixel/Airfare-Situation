@@ -80,9 +80,9 @@ The table below summarizes the key macroeconomic metrics across the three major 
 * [fig1_timeline_overview.png](file:///c:/Users/P/oil%20situation/fig1_timeline_overview.png)
 
 **Key Takeaways:**
-- **Top Panel:** Tracks Brent Crude vs. Jet Fuel prices over 90 months across 9 distinct conflict phases. Jet fuel maintains a steady crack spread above crude, peaking at $\$201.05/\text{bbl}$ during the 2026 US-Iran War conflict.
-- **Middle Panel:** Demonstrates total ticket fares alongside the fuel surcharge component. Fuel surcharges spike sharply during energy shocks, representing up to $35\%$ of total ticket fares during peak escalation.
-- **Bottom Panel:** Shows operational disruptions, including estimated monthly flight cancellations ($>9,400$ per month during peak conflict) and sovereign airspace closure counts.
+- **Top Panel:** Tracks Brent Crude vs. Jet Fuel prices over 90 months across 9 distinct conflict phases. Jet fuel maintains a steady crack spread above crude, peaking at $201.05/bbl during the 2026 US-Iran War conflict.
+- **Middle Panel:** Demonstrates total ticket fares alongside the fuel surcharge component. Fuel surcharges spike sharply during energy shocks, representing up to 35% of total ticket fares during peak escalation.
+- **Bottom Panel:** Tracks Month-over-Month (% MoM) price volatility, comparing monthly Brent crude fluctuations directly against average airline ticket price adjustments.
 
 ---
 
