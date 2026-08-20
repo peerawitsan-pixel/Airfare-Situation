@@ -92,7 +92,7 @@ The table below summarizes the key macroeconomic metrics across the three major 
 
 **Key Takeaways:**
 - Evaluates the Pearson correlation coefficient $r$ across lags $k \in [0, 8]$ months between $\text{MoM}\,\%\,\Delta\text{Brent}$ and $\text{MoM}\,\%\,\Delta\text{Ticket Fare}$.
-- **Peak Correlation at Lag 0 ($r = +0.400, p = 0.0001$):** Confirms that airfares adjust within the same month as oil price movements, driven primarily by dynamic fuel surcharges attached to GDS pricing engine updates.
+- **Peak Correlation at Lag 0 ($r = +0.400, p = 0.0001$):** Confirms that airfares adjust within the same month as oil price movements, driven primarily by dynamic fuel surcharges attached to Global Distribution System (GDS) pricing engine updates.
 
 ---
 
