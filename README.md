@@ -64,12 +64,12 @@ The table below summarizes the key macroeconomic metrics across the three major 
 | :--- | :---: | :---: | :---: |
 | **Baseline Crude Price ($T_0$)** | $61.7 /bbl | $67.3 /bbl | $92.6 /bbl |
 | **Peak Crude Price** | $26.6 /bbl  | $117.6 /bbl | $169.1 /bbl |
-| **Peak Crude Price Change ($\Delta\%$)** | $-57.2%\%$ | $+74.8%\%$ | $+82.6%\%$ |
-| **Peak Ticket Fare Change ($\Delta\%$)** | $-56.5%\%$ | $+34.5%\%$ | $+154.4%\%$ |
+| **Peak Crude Price Change ($\%Delta\%$)** | $-57.2\%$ | $+74.8\%$ | $+82.6\%$ |
+| **Peak Ticket Fare Change ($\%Delta\%$)** | $-56.5\%$ | $+34.5\%$ | $+154.4\%$ |
 | **Peak Pass-Through Rate ($PT$)** | $0.987$ | $0.460$ | **$1.869$** |
 | **Transmission Speed (Months to 5% Fare Shift)** | 0 Months | 0 Months | 4 Months (Surcharge Lag) |
 | **Strait of Hormuz Disruption** | No | No | **Yes (7 Months)** |
-| **Industry Net Margin at Peak** | $-34.8%\%$ | $+2.1%\%$ | **$-32.4%\%$** |
+| **Industry Net Margin at Peak (%) ** | $-34.8\%$ | $+2.1\%$ | **$-32.4\%$** |
 
 ---
 
