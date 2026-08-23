@@ -18,9 +18,12 @@ import matplotlib.dates as mdates
 import seaborn as sns
 from scipy import stats
 import warnings
+import os, sys
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import path as pth
 warnings.filterwarnings("ignore")
 
-DATA_DIR = r"C:\Users\P\oil situation"
+DATA_DIR = pth.PATH
 
 # ─────────────────────────────────────────────────────────────────────────────
 # 1. Load all datasets
