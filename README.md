@@ -1,4 +1,4 @@
-# ✈️ Geopolitical Oil Shocks & Airline Ticket Price Dynamics (2019 – 2026)
+# Geopolitical Oil Shocks & Airline Ticket Price Dynamics (2019 – 2026)
 
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
 [![Pandas](https://img.shields.io/badge/Pandas-2.0%2B-150458.svg)](https://pandas.pydata.org/)
@@ -15,15 +15,15 @@
 
 Jet fuel represents one of the largest volatile operating costs for global airlines, historically accounting for **25% to 40% of operational expenses (OpEx)**. When geopolitical shocks destabilize global crude oil supply, airline ticket prices experience rapid adjustments driven by base fare recalibrations and fuel surcharges.
 
-This project examines **90 months of time-series data (Jan 2019 – Jun 2026)** encompassing **39 major geopolitical conflict events**, **14,850 ticket price records across 33 global airlines**, **10,440 fuel surcharge records**, and **725 airline financial metrics**. 
+This project examines **90 months of time-series data (Jan 2019 – Jun 2026)** encompassing **4 major geopolitical conflict events**, **14,850 ticket price records across 33 global airlines**, **10,440 fuel surcharge records**, and **725 airline financial metrics**. 
 
 ### 🌟 Key Findings
 1. **Immediate Transmission Speed (0–1 Month Lag):** Statistical cross-correlation reveals that airfares respond to crude oil price shocks with **minimal lag (0–1 month, $r = +0.400, p < 0.001$)**. Fuel surcharges allow airlines to quickly adjust total ticket costs before quarterly base fare revisions occur.
 2. **Asymmetric & Amplified Pass-Through in Crisis:**
-   - **Russia-Ukraine War (2022):** Oil spiked $+74.8\%$ to peak at $\$117.6/\text{bbl}$, yielding a peak airfare rise of $+34.5\%$ (Pass-Through Rate $= 0.460$).
-   - **US-Iran War Crisis (2025–2026):** Blockade of the Strait of Hormuz caused Brent crude to surge $+82.6\%$ (reaching $\$169.1/\text{bbl}$ peak). Airfares surged $+154.4\%$, resulting in an unprecedented peak **Pass-Through Rate of $1.869$**.
+   - **Russia-Ukraine War (2022):** Oil spiked +74.8 $ to peak at $ 117.6/bbl, yielding a peak airfare rise of +34.5$ (Pass-Through Rate $= 0.460$).
+   - **US-Iran War Crisis (2025–2026):** Blockade of the Strait of Hormuz caused Brent crude to surge +82.6$ (reaching $169.1/bbl  peak). Airfares surged +154.4$$ , resulting in an unprecedented peak **Pass-Through Rate of $1.869$**.
 3. **Business Model Heterogeneity:** **Full-Service Flag Carriers (FSC)** pass through fuel costs faster and more aggressively via standardized fuel surcharges, preserving profit margins better than **Low-Cost Carriers (LCC)**, which suffer margin compression due to price sensitivity on short-haul routes.
-4. **Severe Profitability Contraction:** During extreme shocks (e.g., US-Iran War), average airline net profit margins collapsed to **$-32.4\%$**, driven by record jet fuel prices ($>\$200/\text{bbl}$), flight rerouting costs around closed Middle Eastern airspaces, and suppressed demand.
+4. **Severe Profitability Contraction:** During extreme shocks (e.g., US-Iran War), average airline net profit margins collapsed , driven by record jet fuel prices ($200/bbl), flight rerouting costs around closed Middle Eastern airspaces, and suppressed demand.
 
 ---
 
@@ -62,14 +62,14 @@ The table below summarizes the key macroeconomic metrics across the three major 
 
 | Metric / Shock Feature | COVID-19 Collapse (Mar 2020) | Russia-Ukraine War (Mar 2022) | US-Iran War Crisis (Dec 2025) |
 | :--- | :---: | :---: | :---: |
-| **Baseline Crude Price ($T_0$)** | $\$61.7 /\text{bbl}$ | $\$67.3 /\text{bbl}$ | $\$92.6 /\text{bbl}$ |
-| **Peak Crude Price** | $\$26.6 /\text{bbl}$ (Demand Shock) | $\$117.6 /\text{bbl}$ | $\$169.1 /\text{bbl}$ |
-| **Peak Crude Price Change ($\Delta\%$)** | $-57.2\%$ | $+74.8\%$ | $+82.6\%$ |
-| **Peak Ticket Fare Change ($\Delta\%$)** | $-56.5\%$ | $+34.5\%$ | $+154.4\%$ |
+| **Baseline Crude Price ($T_0$)** | $61.7 /bbl | $67.3 /bbl | $92.6 /bbl |
+| **Peak Crude Price** | $26.6 /bbl  | $117.6 /bbl | $169.1 /bbl |
+| **Peak Crude Price Change %($\Delta\%$)** | $-57.2\%$ | $+74.8\%$ | $+82.6\%$ |
+| **Peak Ticket Fare Change %($\Delta\%$)** | $-56.5\%$ | $+34.5\%$ | $+154.4\%$ |
 | **Peak Pass-Through Rate ($PT$)** | $0.987$ | $0.460$ | **$1.869$** |
 | **Transmission Speed (Months to 5% Fare Shift)** | 0 Months | 0 Months | 4 Months (Surcharge Lag) |
 | **Strait of Hormuz Disruption** | No | No | **Yes (7 Months)** |
-| **Industry Net Margin at Peak** | $-34.8\%$ | $+2.1\%$ | **$-32.4\%$** |
+| **Industry Net Margin at Peak (%) ** | $-34.8\%$ | $+2.1\%$ | **$-32.4\%$** |
 
 ---
 
@@ -80,9 +80,9 @@ The table below summarizes the key macroeconomic metrics across the three major 
 * [fig1_timeline_overview.png](file:///c:/Users/P/oil%20situation/fig1_timeline_overview.png)
 
 **Key Takeaways:**
-- **Top Panel:** Tracks Brent Crude vs. Jet Fuel prices over 90 months across 9 distinct conflict phases. Jet fuel maintains a steady crack spread above crude, peaking at $\$201.05/\text{bbl}$ during the 2026 US-Iran War conflict.
-- **Middle Panel:** Demonstrates total ticket fares alongside the fuel surcharge component. Fuel surcharges spike sharply during energy shocks, representing up to $35\%$ of total ticket fares during peak escalation.
-- **Bottom Panel:** Shows operational disruptions, including estimated monthly flight cancellations ($>9,400$ per month during peak conflict) and sovereign airspace closure counts.
+- **Top Panel:** Tracks Brent Crude vs. Jet Fuel prices over 90 months across 9 distinct conflict phases. Jet fuel maintains a steady crack spread above crude, peaking at $201.05/bbl during the 2026 US-Iran War conflict.
+- **Middle Panel:** Demonstrates total ticket fares alongside the fuel surcharge component. Fuel surcharges spike sharply during energy shocks, representing up to 35% of total ticket fares during peak escalation.
+- **Bottom Panel:** Tracks Month-over-Month (% MoM) price volatility, comparing monthly Brent crude fluctuations directly against average airline ticket price adjustments.
 
 ---
 
@@ -92,7 +92,7 @@ The table below summarizes the key macroeconomic metrics across the three major 
 
 **Key Takeaways:**
 - Evaluates the Pearson correlation coefficient $r$ across lags $k \in [0, 8]$ months between $\text{MoM}\,\%\,\Delta\text{Brent}$ and $\text{MoM}\,\%\,\Delta\text{Ticket Fare}$.
-- **Peak Correlation at Lag 0 ($r = +0.400, p = 0.0001$):** Confirms that airfares adjust within the same month as oil price movements, driven primarily by dynamic fuel surcharges attached to GDS pricing engine updates.
+- **Peak Correlation at Lag 0 ($r = +0.400, p = 0.0001$):** Confirms that airfares adjust within the same month as oil price movements, driven primarily by dynamic fuel surcharges attached to Global Distribution System (GDS) pricing engine updates.
 
 ---
 
@@ -231,3 +231,4 @@ python analysis2.py
 ## 📜 License & Citation
 
 This project is created for empirical research into energy economics and aviation market dynamics. Feel free to use, modify, and build upon this work with appropriate attribution.
+

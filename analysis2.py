@@ -23,8 +23,11 @@ import seaborn as sns
 from scipy import stats
 import warnings
 warnings.filterwarnings("ignore")
+import os, sys
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import path as pth
 
-DATA_DIR = r"C:\Users\P\oil situation"
+DATA_DIR = pth.PATH
 
 # ─────────────────────────────────────────────────────────────────────────────
 # 1. Load data
