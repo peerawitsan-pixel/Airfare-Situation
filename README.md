@@ -53,7 +53,14 @@ This project examines **90 months of time-series data (Jan 2019 – Jun 2026)** 
   *How do geopolitical oil shocks translate into airline ticket price increases, and with what time lag?*
 - **Q2: Pass-Through Rate Consistency & Crisis Differences**  
   *Do airlines pass through geopolitical oil price shocks into airfares at a consistent rate and speed, and how does the 2025–2026 Iran Crisis differ from COVID-19 (2020) and the Russia-Ukraine War (2022)?*
-
+- **Q3: Event Severity & Immediate Market Impact**  
+  *Do more severe geopolitical events produce larger immediate impacts on oil prices and airfares?*
+- **Q4: Airline Business Model & Cost Pass-Through**  
+  *Do Full-Service Carriers (FSCs) and Low-Cost Carriers (LCCs) respond differently to oil-price shocks in terms of airfare pass-through?*
+- **Q5: Fuel Hedging Effectiveness**  
+  *When does fuel hedging become financially meaningful for airlines, and does a higher hedging ratio necessarily lead to better profitability?*
+- **Q6: Operational Cost of Airspace Disruption**  
+  *During a major airspace disruption, which creates a greater financial burden for airlines: additional fuel costs from rerouting or revenue losses from flight cancellations?*
 ---
 
 ## 📊 Comparative Shock Summary
