@@ -59,8 +59,8 @@ This project examines **90 months of time-series data (Jan 2019 – Jun 2026)** 
   *Do Full-Service Carriers (FSCs) and Low-Cost Carriers (LCCs) respond differently to oil-price shocks in terms of airfare pass-through?*
 - **Q5: Fuel Hedging Effectiveness**  
   *When does fuel hedging become financially meaningful for airlines, and does a higher hedging ratio necessarily lead to better profitability?*
-- **Q6: Operational Cost of Airspace Disruption**  
-  *During a major airspace disruption, which creates a greater financial burden for airlines: additional fuel costs from rerouting or revenue losses from flight cancellations?*
+- **Q6: Operational and Financial Impact of Airspace Disruption**  
+  *How does a major airspace disruption affect airline operating costs, fuel surcharges, and profitability?*
 ---
 
 ## 📊 Comparative Shock Summary
