@@ -65,8 +65,6 @@ This project examines **90 months of time-series data (Jan 2019 – Jun 2026)** 
   *Do more severe geopolitical events produce larger immediate impacts on oil prices and airfares?*
 - **Q4: Airline Business Model & Cost Pass-Through**  
   *Do Full-Service Carriers (FSCs) and Low-Cost Carriers (LCCs) respond differently to oil-price shocks in terms of airfare pass-through?*
-- **Q5: Fuel Hedging Effectiveness**  
-  *When does fuel hedging become financially meaningful for airlines, and does a higher hedging ratio necessarily lead to better profitability?*
 - **Q6: Operational Cost of Airspace Disruption**  
   *During a major airspace disruption, which creates a greater financial burden for airlines: additional fuel costs from rerouting or revenue losses from flight cancellations?*
 
@@ -77,7 +75,6 @@ This project examines **90 months of time-series data (Jan 2019 – Jun 2026)** 
   *What did rerouting around the Strait of Hormuz cost airlines in terms of extra detour fuel versus revenue lost from route cancellations?*
 - **Business3: Airline Break-Even Brent Crude Prices**  
   *What is the break-even Brent price for each airline before it becomes loss-making, and how much headroom does fuel hedging provide?*
-
 ---
 
 ## 📊 Comparative Shock Summary
