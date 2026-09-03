@@ -7,7 +7,7 @@
 [![Data-Scope](https://img.shields.io/badge/Scope-2019--2026%20(90%20Months)-orange.svg)]()
 [![Status](https://img.shields.io/badge/Status-Complete-brightgreen.svg)]()
 
-> **An empirical data science investigation into how geopolitical conflict events and oil market disruptions transmit into global airfares, pass-through rates, transmission lags, and airline profitability across major crises.**
+> **An empirical data science investigation into how geopolitical conflict events and oil market disruptions transmit into global airfares, pass-through rates, transmission lags, airline profitability, fuel hedging strategies, and airspace rerouting costs across major crises.**
 
 ---
 
@@ -15,15 +15,17 @@
 
 Jet fuel represents one of the largest volatile operating costs for global airlines, historically accounting for **25% to 40% of operational expenses (OpEx)**. When geopolitical shocks destabilize global crude oil supply, airline ticket prices experience rapid adjustments driven by base fare recalibrations and fuel surcharges.
 
-This project examines **90 months of time-series data (Jan 2019 – Jun 2026)** encompassing **4 major geopolitical conflict events**, **14,850 ticket price records across 33 global airlines**, **10,440 fuel surcharge records**, and **725 airline financial metrics**. 
+This project examines **90 months of time-series data (Jan 2019 – Jun 2026)** encompassing **4 major geopolitical conflict events**, **14,850 ticket price records across 33 global airlines**, **10,440 fuel surcharge records**, **725 airline financial metrics**, and **3,240 route disruption records**. 
 
 ### 🌟 Key Findings
-1. **Immediate Transmission Speed (0–1 Month Lag):** Statistical cross-correlation reveals that airfares respond to crude oil price shocks with **minimal lag (0–1 month, $r = +0.400, p < 0.001$)**. Fuel surcharges allow airlines to quickly adjust total ticket costs before quarterly base fare revisions occur.
+1. **Immediate Transmission Speed (0–1 Month Lag):** Statistical cross-correlation reveals that airfares respond to crude oil price shocks with **minimal lag ($r = +0.400, p < 0.001$ at lag 0)**. Fuel surcharges allow airlines to quickly adjust total ticket costs before quarterly base fare revisions occur.
 2. **Asymmetric & Amplified Pass-Through in Crisis:**
-   - **Russia-Ukraine War (2022):** Oil spiked +74.8 $ to peak at $ 117.6/bbl, yielding a peak airfare rise of +34.5$ (Pass-Through Rate $= 0.460$).
-   - **US-Iran War Crisis (2025–2026):** Blockade of the Strait of Hormuz caused Brent crude to surge +82.6$ (reaching $169.1/bbl  peak). Airfares surged +154.4$$ , resulting in an unprecedented peak **Pass-Through Rate of $1.869$**.
+   - **Russia-Ukraine War (2022):** Oil spiked +$74.8/bbl to peak at $117.6/bbl, yielding a peak airfare rise of +$34.5 (Pass-Through Rate $= 0.460$).
+   - **US-Iran War Crisis (2025–2026):** Blockade of the Strait of Hormuz caused Brent crude to surge +$82.6/bbl (reaching $169.1/bbl peak). Airfares surged +$154.4, resulting in an unprecedented peak **Pass-Through Rate of $1.869$**.
 3. **Business Model Heterogeneity:** **Full-Service Flag Carriers (FSC)** pass through fuel costs faster and more aggressively via standardized fuel surcharges, preserving profit margins better than **Low-Cost Carriers (LCC)**, which suffer margin compression due to price sensitivity on short-haul routes.
-4. **Severe Profitability Contraction:** During extreme shocks (e.g., US-Iran War), average airline net profit margins collapsed , driven by record jet fuel prices ($200/bbl), flight rerouting costs around closed Middle Eastern airspaces, and suppressed demand.
+4. **Fuel Hedging Cushion & Limits (Business1):** Recorded hedge savings peak in 2026-Q1 at **25.3% of the gross fuel bill**, providing up to **+8.1 percentage points** of profit margin cushion during peak crisis. However, across carriers, hedge ratios show no correlation with realized margins—hedging lifts the whole industry's cost curve but does not decide individual winners.
+5. **Strait of Hormuz Disruption Burden (Business2):** Total airspace disruption burden reached **$12.6 Million**, with **95%** stemming from lost revenue due to route cancellations and only **5%** from extra detour fuel.
+6. **Break-Even Brent Prices & Survival (Business3):** Airline break-even Brent crude prices range between **$107 and $144/bbl** (median **$115/bbl**). Hedging buys a median +$12.8/bbl of headroom. At 2026-Q1 prices ($130.9/bbl), only **4 out of 25 airlines** remained profitable above break-even.
 
 ---
 
@@ -39,6 +41,11 @@ This project examines **90 months of time-series data (Jan 2019 – Jun 2026)** 
   - [Figure 5: Three-Shock Trajectory Comparison ($T_0=100$)](#figure-5-three-shock-trajectory-comparison-t_0100)
   - [Figure 6: Pass-Through Rates & Business Model Dynamics](#figure-6-pass-through-rates--business-model-dynamics)
   - [Figure 7: 2025–2026 Iran Crisis Deep Dive](#figure-7-20252026-iran-crisis-deep-dive)
+  - [Figure 8: Fuel Hedging Timing & Savings (Business1 Part 1)](#figure-8-fuel-hedging-timing--savings-business1-part-1)
+  - [Figure 9: Hedging Impact & Margin Cushion (Business1 Part 2)](#figure-9-hedging-impact--margin-cushion-business1-part-2)
+  - [Figure 10: Strait of Hormuz Carrier Burden Breakdown (Business2 Part 1)](#figure-10-strait-of-hormuz-carrier-burden-breakdown-business2-part-1)
+  - [Figure 11: Strait of Hormuz Monthly Profile & Detour Hotspots (Business2 Part 2)](#figure-11-strait-of-hormuz-monthly-profile--detour-hotspots-business2-part-2)
+  - [Figure 12: Airline Break-Even Brent Prices (Business3)](#figure-12-airline-break-even-brent-prices-business3)
 - [Dataset Schema](#-dataset-schema)
 - [Methodology](#-methodology)
 - [Repository Structure](#-repository-structure)
@@ -49,10 +56,27 @@ This project examines **90 months of time-series data (Jan 2019 – Jun 2026)** 
 
 ## 🎯 Research Questions
 
+### Macro Economic Pipeline (Q1 & Q2)
 - **Q1: Transmission Speed & Lag Structure**  
   *How do geopolitical oil shocks translate into airline ticket price increases, and with what time lag?*
 - **Q2: Pass-Through Rate Consistency & Crisis Differences**  
   *Do airlines pass through geopolitical oil price shocks into airfares at a consistent rate and speed, and how does the 2025–2026 Iran Crisis differ from COVID-19 (2020) and the Russia-Ukraine War (2022)?*
+- **Q3: Event Severity & Immediate Market Impact**  
+  *Do more severe geopolitical events produce larger immediate impacts on oil prices and airfares?*
+- **Q4: Airline Business Model & Cost Pass-Through**  
+  *Do Full-Service Carriers (FSCs) and Low-Cost Carriers (LCCs) respond differently to oil-price shocks in terms of airfare pass-through?*
+- **Q5: Fuel Hedging Effectiveness**  
+  *When does fuel hedging become financially meaningful for airlines, and does a higher hedging ratio necessarily lead to better profitability?*
+- **Q6: Operational Cost of Airspace Disruption**  
+  *During a major airspace disruption, which creates a greater financial burden for airlines: additional fuel costs from rerouting or revenue losses from flight cancellations?*
+
+### Business & Operational Angle Pipeline (Business1, Business2, Business3)
+- **Business1: Fuel Hedging Effectiveness & Timing**  
+  *When does fuel hedging start to pay off during oil shocks, by how much, and does hedge coverage protect individual airline profit margins?*
+- **Business2: Strait of Hormuz Rerouting Economics**  
+  *What did rerouting around the Strait of Hormuz cost airlines in terms of extra detour fuel versus revenue lost from route cancellations?*
+- **Business3: Airline Break-Even Brent Crude Prices**  
+  *What is the break-even Brent price for each airline before it becomes loss-making, and how much headroom does fuel hedging provide?*
 
 ---
 
@@ -62,14 +86,14 @@ The table below summarizes the key macroeconomic metrics across the three major 
 
 | Metric / Shock Feature | COVID-19 Collapse (Mar 2020) | Russia-Ukraine War (Mar 2022) | US-Iran War Crisis (Dec 2025) |
 | :--- | :---: | :---: | :---: |
-| **Baseline Crude Price ($T_0$)** | $61.7 /bbl | $67.3 /bbl | $92.6 /bbl |
-| **Peak Crude Price** | $26.6 /bbl  | $117.6 /bbl | $169.1 /bbl |
-| **Peak Crude Price Change %($\Delta\%$)** | $-57.2\%$ | $+74.8\%$ | $+82.6\%$ |
-| **Peak Ticket Fare Change %($\Delta\%$)** | $-56.5\%$ | $+34.5\%$ | $+154.4\%$ |
+| **Baseline Crude Price ($T_0$)** | $61.7/bbl | $67.3/bbl | $92.6/bbl |
+| **Peak Crude Price** | $26.6/bbl | $117.6/bbl | $169.1/bbl |
+| **Peak Crude Price Change % ($\Delta\%$)** | $-57.2\%$ | $+74.8\%$ | $+82.6\%$ |
+| **Peak Ticket Fare Change % ($\Delta\%$)** | $-56.5\%$ | $+34.5\%$ | $+154.4\%$ |
 | **Peak Pass-Through Rate ($PT$)** | $0.987$ | $0.460$ | **$1.869$** |
 | **Transmission Speed (Months to 5% Fare Shift)** | 0 Months | 0 Months | 4 Months (Surcharge Lag) |
 | **Strait of Hormuz Disruption** | No | No | **Yes (7 Months)** |
-| **Industry Net Margin at Peak (%) ** | $-34.8\%$ | $+2.1\%$ | **$-32.4\%$** |
+| **Industry Net Margin at Peak (%)** | $-34.8\%$ | $+2.1\%$ | **$-32.4\%$** |
 
 ---
 
@@ -151,6 +175,62 @@ The table below summarizes the key macroeconomic metrics across the three major 
 
 ---
 
+### Figure 8: Fuel Hedging Timing & Savings (Business1 Part 1)
+![Figure 8: Fuel Hedging Timing](fig8_hedging_timing.png)
+* [fig8_hedging_timing.png](file:///c:/Users/P/oil%20situation/fig8_hedging_timing.png)
+
+**Key Takeaways:**
+- Tracks quarterly recorded money saved by fuel hedging (% of gross fuel bill) against Brent crude price (2019-Q1 to 2026-Q1).
+- **Hedge Savings Start:** First recorded savings appear in 2021-Q3 and turn material (>5% of fuel bill) in 2022-Q2 during the Russia-Ukraine war shock.
+- **Peak Savings:** Savings peak in **2026-Q1 at 25.3% of the gross fuel bill**, when Brent crude averaged $130.9/bbl.
+
+---
+
+### Figure 9: Hedging Impact & Margin Cushion (Business1 Part 2)
+![Figure 9: Hedging Impact](fig9_hedging_impact.png)
+* [fig9_hedging_impact.png](file:///c:/Users/P/oil%20situation/fig9_hedging_impact.png)
+
+**Key Takeaways:**
+- Three-panel breakdown: (a) Margin cushion points added by hedging over time; (b) 2026-Q1 with vs. without hedging dumbbell comparison; (c) Cross-airline scatter plot of hedge ratio vs. profit margin.
+- **Margin Cushion:** Hedging adds up to **+8.1 percentage points** of profit margin cushion during peak crisis (lifting reported margin from -24.55% to -16.45%).
+- **Industry vs. Carrier Correlation:** Across individual airlines, hedge ratio shows virtually zero correlation ($r = -0.138, p = 0.512$) with realized margin—hedging lifts the whole industry's cost curve, but operational efficiency and route network decide carrier survival.
+
+---
+
+### Figure 10: Strait of Hormuz Carrier Burden Breakdown (Business2 Part 1)
+![Figure 10: Hormuz Carrier Burden](fig10_reroute_cost.png)
+* [fig10_reroute_cost.png](file:///c:/Users/P/oil%20situation/fig10_reroute_cost.png)
+
+**Key Takeaways:**
+- Two-panel breakdown: (a) Absolute detour fuel vs. lost revenue burden by airline; (b) Route-count normalised burden comparing Gulf hub carriers to international carriers.
+- **Revenue Loss Dominance:** Total disruption burden reached **$12.6 Million**, with **95%** of the cost driven by lost revenue from route cancellations and only **5%** by extra detour fuel.
+- **Gulf Hub Geographic Penalty:** Gulf hubs absorbed 64% of all extra detour fuel costs. However, normalised per route-month, Gulf carriers were not worse off ($40,962 vs $47,812) because cancellation revenue loss scales with route size rather than hub geographic location.
+
+---
+
+### Figure 11: Strait of Hormuz Monthly Profile & Detour Hotspots (Business2 Part 2)
+![Figure 11: Hormuz Monthly Profile & Detours](fig11_reroute_monthly_detours.png)
+* [fig11_reroute_monthly_detours.png](file:///c:/Users/P/oil%20situation/fig11_reroute_monthly_detours.png)
+
+**Key Takeaways:**
+- Two-panel breakdown: (c) Monthly profile of detour fuel, lost revenue, and cancellations; (d) Worst detour routes ranked by average extra flight distance per flight.
+- **Mechanism Decoupling:** Reroutes remained flat at 29 routes/month across all 7 months, but route cancellations collapsed from 14/month to just 2/month as soon as de-escalation began in April 2026—ending the most expensive half of the shock early.
+- **Detour Hotspots:** Long-haul routes connecting Asia and Europe via Middle Eastern airspace required up to +1,200 km extra detour distance per flight, adding substantial per-flight fuel penalties.
+
+---
+
+### Figure 12: Airline Break-Even Brent Prices (Business3)
+![Figure 12: Break-Even Brent Prices](fig12_breakeven_brent.png)
+* [fig12_breakeven_brent.png](file:///c:/Users/P/oil%20situation/fig12_breakeven_brent.png)
+
+**Key Takeaways:**
+- Dumbbell ranking comparing break-even Brent crude prices WITH hedging (blue dot) vs. WITHOUT hedging (red dot), validated against actual 2026-Q1 net margins.
+- **Break-Even Brent Range:** Hedged break-even Brent prices span **$107 to $144/bbl** (median **$115/bbl**).
+- **Hedge Book Headroom:** Fuel hedging buys a median **+$12.8/bbl** of extra oil price headroom (up to +$37.6/bbl for top-hedged LCCs).
+- **Crisis Survival:** At the 2026-Q1 Brent price of $130.9/bbl, only **4 out of 25 airlines** (United Airlines, flynas, Air Arabia, Singapore Airlines) remained profitable above their break-even price.
+
+---
+
 ## 📑 Dataset Schema
 
 The workspace utilizes six interconnected CSV datasets:
@@ -160,7 +240,7 @@ The workspace utilizes six interconnected CSV datasets:
 | [`oil_jet_fuel_prices.csv`](file:///c:/Users/P/oil%20situation/oil_jet_fuel_prices.csv) | Monthly oil & jet fuel prices | `month`, `brent_crude_usd_barrel`, `jet_fuel_usd_barrel`, `strait_hormuz_disrupted`, `conflict_phase` | 90 |
 | [`conflict_oil_events.csv`](file:///c:/Users/P/oil%20situation/conflict_oil_events.csv) | Geopolitical event log | `event_date`, `event_type`, `severity`, `oil_price_change_pct`, `airfare_impact_pct`, `flight_cancellations_est` | 39 |
 | [`airline_ticket_prices.csv`](file:///c:/Users/P/oil%20situation/airline_ticket_prices.csv) | Route-level ticket pricing | `month`, `airline`, `route_class`, `base_fare_usd`, `fuel_surcharge_usd`, `total_fare_usd`, `load_factor_pct` | 14,850 |
-| [`airline_financial_impact.csv`](file:///c:/Users/P/oil%20situation/airline_financial_impact.csv) | Financial & operating metrics | `month`, `airline`, `fuel_cost_pct_opex`, `operating_margin_pct`, `profit_margin_pct` | 725 |
+| [`airline_financial_impact.csv`](file:///c:/Users/P/oil%20situation/airline_financial_impact.csv) | Financial & operating metrics | `month`, `airline`, `fuel_cost_pct_opex`, `operating_margin_pct`, `profit_margin_pct`, `fuel_hedging_pct` | 725 |
 | [`fuel_surcharges.csv`](file:///c:/Users/P/oil%20situation/fuel_surcharges.csv) | Surcharge granularity | `month`, `airline`, `route_class`, `fuel_surcharge_usd`, `surcharge_pct_of_total` | 10,440 |
 | [`route_cost_impact.csv`](file:///c:/Users/P/oil%20situation/route_cost_impact.csv) | Route detour & cost metrics | `month`, `route_id`, `flight_time_minutes`, `reroute_extra_time_min`, `extra_fuel_burn_liters` | 3,240 |
 
@@ -178,6 +258,9 @@ The workspace utilizes six interconnected CSV datasets:
 4. **Pass-Through Rate ($PT$) Calculation:**  
    Formulated empirical pass-through rate as the ratio of cumulative percentage airfare change relative to cumulative percentage oil price change:
    $$PT_t = \frac{(\text{Fare}_t - \text{Fare}_{T_0}) / \text{Fare}_{T_0}}{(\text{Oil}_t - \text{Oil}_{T_0}) / \text{Oil}_{T_0}}$$
+5. **Break-Even Brent Regression Modeling:**  
+   Fitted linear margin-vs-Brent crude price regressions for each airline (excluding COVID-19 revenue collapse quarters) to derive hedged vs. unhedged break-even Brent price levels:
+   $$\text{Margin}_i = \alpha + \beta \times \text{Brent} \implies \text{Break-Even Brent} = -\frac{\alpha}{\beta}$$
 
 ---
 
@@ -186,8 +269,11 @@ The workspace utilizes six interconnected CSV datasets:
 ```
 oil situation/
 ├── README.md                          # Comprehensive presentation & documentation
+├── CLAUDE.md                          # Repository developer guidelines & figure inventory
+├── path.py                            # Shared data path configuration
 ├── analysis.py                        # Primary analytical pipeline (Q1 & Figures 1-4)
 ├── analysis2.py                       # Advanced shock comparative pipeline (Q2 & Figures 5-7)
+├── analysis_bussiness.py              # Business angle pipeline (Business1-3 & Figures 8-12)
 ├── oil_jet_fuel_prices.csv            # Monthly Brent crude & jet fuel price series (2019-2026)
 ├── conflict_oil_events.csv            # Geopolitical event catalog with severity & impact
 ├── airline_ticket_prices.csv          # Monthly route-level ticket price dataset (14.8k rows)
@@ -200,7 +286,12 @@ oil situation/
 ├── fig4_phase_dashboard.png           # Figure 4: Macro phase dashboard
 ├── fig5_three_shock_trajectories.png  # Figure 5: Indexed trajectory comparison
 ├── fig6_pass_through_rates.png        # Figure 6: Pass-through rates & business models
-└── fig7_iran_deepdive.png             # Figure 7: 2025-2026 Iran crisis deep dive
+├── fig7_iran_deepdive.png             # Figure 7: 2025-2026 Iran crisis deep dive
+├── fig8_hedging_timing.png            # Figure 8: Fuel hedging timing & savings (Business1 Part 1)
+├── fig9_hedging_impact.png            # Figure 9: Hedging impact & margin cushion (Business1 Part 2)
+├── fig10_reroute_cost.png             # Figure 10: Hormuz carrier burden & normalisation (Business2 Part 1)
+├── fig11_reroute_monthly_detours.png  # Figure 11: Hormuz monthly profile & detours (Business2 Part 2)
+└── fig12_breakeven_brent.png          # Figure 12: Airline break-even Brent prices (Business3)
 ```
 
 ---
@@ -226,9 +317,13 @@ To run the Question 2 shock comparison & deep dive pipeline and regenerate Figur
 python analysis2.py
 ```
 
+To run the Business Angle analysis pipeline and regenerate Figures 8–12:
+```bash
+python analysis_bussiness.py
+```
+
 ---
 
 ## 📜 License & Citation
 
 This project is created for empirical research into energy economics and aviation market dynamics. Feel free to use, modify, and build upon this work with appropriate attribution.
-

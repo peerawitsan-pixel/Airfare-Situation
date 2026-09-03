@@ -1,20 +1,20 @@
 #!/usr/bin/env python3
 """
-BUSINESS-ANGLE ANALYSIS  (B1, B2, B4)  -- see suggestion.md / suggestion_th.md
+BUSINESS-ANGLE ANALYSIS  (Business1, Business2, Business3)  -- see suggestion.md / suggestion_th.md
 
-B1: When does fuel hedging start to pay off, and by how much?
-    -> fig8_hedging_effectiveness.png
-B2: What did rerouting around the Strait of Hormuz actually cost?
-    -> fig9_reroute_cost.png
-B4: What is the break-even Brent price for each airline?
-    -> fig11_breakeven_brent.png
+Business1: When does fuel hedging start to pay off, and by how much?
+    -> fig8_hedging_timing.png
+    -> fig9_hedging_impact.png
+Business2: What did rerouting around the Strait of Hormuz actually cost?
+    -> fig10_reroute_cost.png  (carrier burden & normalisation)
+    -> fig11_reroute_monthly_detours.png  (monthly profile & detour hotspots)
+Business3: What is the break-even Brent price for each airline?
+    -> fig12_breakeven_brent.png
 
-Figure numbering follows suggestion.md, where fig10 is reserved for B3 (FSC vs LCC),
-which is not implemented here.
 
 Datasets used:
-  airline_financial_impact.csv  - quarterly x airline P&L, hedging (B1, B4)
-  route_cost_impact.csv         - monthly x airline x route detour economics (B2)
+  airline_financial_impact.csv  - quarterly x airline P&L, hedging (Business1, Business3)
+  route_cost_impact.csv         - monthly x airline x route detour economics (Business2)
   oil_jet_fuel_prices.csv       - monthly Brent / jet fuel spine (context)
 """
 
@@ -51,7 +51,7 @@ routes = pd.read_csv(f"{DATA_DIR}/route_cost_impact.csv")
 oil    = pd.read_csv(f"{DATA_DIR}/oil_jet_fuel_prices.csv")
 
 print("=" * 70)
-print("BUSINESS ANALYSIS  -  B1 / B2 / B4")
+print("BUSINESS ANALYSIS  -  Business1 / Business2 / Business3")
 print("=" * 70)
 print(f"  financial : {fin.shape[0]:,} rows  ({fin.quarter.nunique()} quarters x "
       f"{fin.airline.nunique()} airlines, {fin.quarter.min()} .. {fin.quarter.max()})")
@@ -61,10 +61,10 @@ print(f"  oil       : {oil.shape[0]:,} months  ({oil.month.min()} .. {oil.month.
 
 
 # ═════════════════════════════════════════════════════════════════════════════
-# B1.  HEDGING EFFECTIVENESS AND TIMING
+# Business1.  HEDGING EFFECTIVENESS AND TIMING
 # ═════════════════════════════════════════════════════════════════════════════
 print("\n" + "=" * 70)
-print("B1. WHEN DOES FUEL HEDGING START TO PAY OFF?")
+print("Business1. WHEN DOES FUEL HEDGING START TO PAY OFF?")
 print("=" * 70)
 
 fin = fin.copy()
@@ -135,30 +135,23 @@ print(f"    best margin : {pk.loc[pk.profit_margin_pct.idxmax()].airline} "
       f"({pk.loc[pk.profit_margin_pct.idxmax()].fuel_hedging_pct:.1f}% hedged) "
       f"-> margin {pk.profit_margin_pct.max():+.1f}%")
 
-# ── Figure 8 ────────────────────────────────────────────────────────────────
-# Four panels, one plain question each, so the chart can be read top-to-bottom
-# without cross-referencing axes.
+# ── Figure 8: Hedging Timing ────────────────────────────────────────────────
 i_pk = int(q.index[q.quarter == peak_name][0])
 
 C_GREY = "#b0b7bd"      # nothing recorded
 C_LITE = "#7fb2dc"      # recorded but small
 C_DARK = "#0d4f8b"      # material
 
-fig = plt.figure(figsize=(17, 11))
-gs  = gridspec.GridSpec(2, 3, height_ratios=[1, 1], hspace=0.42, wspace=0.30,
-                        left=0.055, right=0.965, top=0.865, bottom=0.085)
-fig.suptitle("B1 — Fuel Hedging: When Does It Start To Pay Off, And By How Much?",
-             fontsize=17, fontweight="bold", y=0.965)
-fig.text(0.5, 0.917,
-         f"Short answer:  nothing shows up until {first_nonzero}  ·  it turns material in "
-         f"{first_material}  ·  it peaks in {peak_name}, worth "
-         f"+{q.margin_cushion.iloc[i_pk]:.1f} margin points",
-         ha="center", fontsize=12, color="#333333")
-
 x = np.arange(len(q))
 
-# ── (a) WHEN did hedging start to pay? ──────────────────────────────────────
-ax1 = fig.add_subplot(gs[0, :])
+fig8, ax1 = plt.subplots(figsize=(15, 6.5))
+fig8.suptitle("Business1 (Part 1) — Fuel Hedging: When Does It Start To Pay Off?",
+              fontsize=16, fontweight="bold", y=0.98)
+fig8.text(0.5, 0.92,
+          f"Short answer: nothing shows up until {first_nonzero}  ·  turns material in "
+          f"{first_material}  ·  peaks in {peak_name} at {q.savings_pct_fuel.iloc[i_pk]:.1f}% of fuel bill",
+          ha="center", fontsize=11.5, color="#333333")
+
 colors = [C_GREY if v == 0 else (C_DARK if v >= MATERIAL else C_LITE)
           for v in q.savings_pct_fuel]
 ax1.bar(x, q.savings_pct_fuel, color=colors, width=0.68, zorder=3)
@@ -185,7 +178,6 @@ axb.grid(False)
 
 i_fn = int(q.index[q.quarter == first_nonzero][0])
 i_fm = int(q.index[q.quarter == first_material][0])
-# Arrows land on the middle of the bar so they never sit on top of its value label.
 ax1.annotate("first recorded\nsavings", xy=(i_fn, q.savings_pct_fuel.iloc[i_fn] * 0.55),
              xytext=(i_fn - 3.4, q.savings_pct_fuel.max() * 0.42), fontsize=9,
              ha="center", color="#333333",
@@ -201,9 +193,8 @@ ax1.legend(handles=[mpatches.Patch(color=C_GREY, label="no savings recorded"),
                     plt.Line2D([], [], color="#8e44ad", ls=":", lw=2,
                                label="Brent crude ($/bbl, right axis)")],
            loc="upper left", fontsize=9, framealpha=0.94, ncol=2)
-ax1.set_title("(a)  WHEN does hedging pay?   Only when oil is expensive — the hedge has to be "
-              "in the money before any saving is booked",
-              fontsize=12, fontweight="bold", pad=10)
+ax1.set_title("Hedging savings pay off only when Brent crude is high — the hedge must be in the money",
+              fontsize=11.5, fontweight="bold", pad=10)
 ax1.text(0.995, 0.60,
          f"The hedge ratio itself barely moves\n"
          f"({q.hedge_ratio.min():.0f}-{q.hedge_ratio.max():.0f}% of volume all the way through).\n"
@@ -211,8 +202,24 @@ ax1.text(0.995, 0.60,
          transform=ax1.transAxes, ha="right", va="top", fontsize=9, style="italic",
          bbox=dict(boxstyle="round,pad=0.45", fc="#f4f6f8", ec="#c9d1d8"))
 
-# ── (b) HOW MUCH margin did it add? ─────────────────────────────────────────
-ax2 = fig.add_subplot(gs[1, 0])
+plt.tight_layout(rect=[0, 0, 1, 0.90])
+plt.savefig(f"{DATA_DIR}/fig8_hedging_timing.png", dpi=180, bbox_inches="tight")
+plt.close()
+print("\n  [Saved] fig8_hedging_timing.png")
+
+
+# ── Figure 9: Hedging Impact & Cross-Section ────────────────────────────────
+fig9 = plt.figure(figsize=(17, 6.5))
+gs = gridspec.GridSpec(1, 3, wspace=0.30, left=0.055, right=0.965, top=0.82, bottom=0.15)
+fig9.suptitle("Business1 (Part 2) — Fuel Hedging: Margin Impact & Cross-Airline Effectiveness",
+              fontsize=16, fontweight="bold", y=0.96)
+fig9.text(0.5, 0.90,
+          f"Short answer: hedging adds up to +{q.margin_cushion.iloc[i_pk]:.1f} pp margin cushion in a crisis, "
+          f"but hedge ratio does not predict individual airline survival",
+          ha="center", fontsize=11.5, color="#333333")
+
+# ── (a) HOW MUCH margin did it add? ─────────────────────────────────────────
+ax2 = fig9.add_subplot(gs[0, 0])
 cush_colors = [C_GREY if v == 0 else (C_DARK if v >= 1 else C_LITE)
                for v in q.margin_cushion]
 ax2.bar(x, q.margin_cushion, color=cush_colors, width=0.68, zorder=3)
@@ -230,11 +237,11 @@ calm = q[(q.margin_cushion > 0) & (q.quarter != peak_name)].margin_cushion.mean(
 ax2.axhline(calm, color="#555555", ls="--", lw=1.2)
 ax2.text(0.3, calm + 0.18, f"every other quarter: about +{calm:.1f} pp",
          ha="left", fontsize=9, color="#555555")
-ax2.set_title("(b)  HOW MUCH is it worth?\nAlmost nothing in calm quarters, a lot in a crisis",
-              fontsize=12, fontweight="bold", pad=10)
+ax2.set_title("(a)  HOW MUCH is it worth?\nAlmost nothing in calm quarters, a lot in a crisis",
+              fontsize=11.5, fontweight="bold", pad=10)
 
-# ── (c) the peak quarter, with vs without ───────────────────────────────────
-ax3 = fig.add_subplot(gs[1, 1])
+# ── (b) the peak quarter, with vs without ───────────────────────────────────
+ax3 = fig9.add_subplot(gs[0, 1])
 rows = [
     ("Fuel bill\n(% of revenue)", q.fuel_pct_rev.iloc[i_pk], q.net_fuel_pct.iloc[i_pk], "lower"),
     ("Net profit margin\n(%)",    q.margin_unhedged.iloc[i_pk], q.margin.iloc[i_pk], "higher"),
@@ -260,11 +267,11 @@ ax3.set_xlabel("Percent", fontsize=10)
 ax3.legend(handles=[mpatches.Patch(color=C_NOHEDGE, label="without hedging (counterfactual)"),
                     mpatches.Patch(color=C_HEDGE, label="as reported (with hedging)")],
            fontsize=9, loc="lower center", framealpha=0.94)
-ax3.set_title(f"(c)  {peak_name} in one view:\nwhat hedging actually changed",
-              fontsize=12, fontweight="bold", pad=10)
+ax3.set_title(f"(b)  {peak_name} in one view:\nwhat hedging actually changed",
+              fontsize=11.5, fontweight="bold", pad=10)
 
-# ── (d) does hedging MORE mean surviving better? ────────────────────────────
-ax4 = fig.add_subplot(gs[1, 2])
+# ── (c) does hedging MORE mean surviving better? ────────────────────────────
+ax4 = fig9.add_subplot(gs[0, 2])
 for t, c in [("Flag Carrier", C_FSC), ("Low Cost", C_LCC)]:
     s = pk[pk.airline_type == t]
     ax4.scatter(s.fuel_hedging_pct, s.profit_margin_pct, s=95, color=c,
@@ -276,7 +283,6 @@ ax4.plot(xs, sl * xs + ic, color="#333333", ls="--", lw=1.6,
 
 lab_pts = pd.concat([pk.nlargest(2, "fuel_hedging_pct"), pk.nsmallest(2, "fuel_hedging_pct"),
                      pk.nlargest(2, "profit_margin_pct")]).drop_duplicates("airline")
-# Alternate the offset so near-identical points (Delta / Lufthansa) do not overprint.
 for k, (_, rr) in enumerate(lab_pts.sort_values("fuel_hedging_pct").iterrows()):
     dy = 7 if k % 2 == 0 else -13
     ax4.annotate(rr.airline, (rr.fuel_hedging_pct, rr.profit_margin_pct),
@@ -285,12 +291,13 @@ for k, (_, rr) in enumerate(lab_pts.sort_values("fuel_hedging_pct").iterrows()):
 ax4.set_xlabel("Fuel hedged (% of volume)", fontsize=10)
 ax4.set_ylabel(f"Net profit margin in {peak_name} (%)", fontsize=10)
 ax4.legend(fontsize=8.5, loc="lower left", framealpha=0.94)
-ax4.set_title("(d)  Does hedging MORE mean surviving better?\nNo — the line is flat, "
-              "each dot is one airline", fontsize=12, fontweight="bold", pad=10)
+ax4.set_title("(c)  Does hedging MORE mean surviving better?\nNo — the line is flat, "
+              "each dot is one airline", fontsize=11.5, fontweight="bold", pad=10)
 
-plt.savefig(f"{DATA_DIR}/fig8_hedging_effectiveness.png", dpi=180, bbox_inches="tight")
+plt.savefig(f"{DATA_DIR}/fig9_hedging_impact.png", dpi=180, bbox_inches="tight")
 plt.close()
-print("\n  [Saved] fig8_hedging_effectiveness.png")
+print("\n  [Saved] fig9_hedging_impact.png")
+
 
 
 # ═════════════════════════════════════════════════════════════════════════════
@@ -404,19 +411,18 @@ monthly = win.groupby("month").agg(
 print("\n  Monthly profile of the disruption")
 print(monthly.round(0).to_string(index=False))
 
-# ── Figure 9 ────────────────────────────────────────────────────────────────
-fig = plt.figure(figsize=(16.5, 10.5))
-gs  = gridspec.GridSpec(2, 2, height_ratios=[1.35, 1], hspace=0.32, wspace=0.40,
-                        left=0.075, right=0.97, top=0.885, bottom=0.08)
-fig.suptitle("B2 — The Operational Shock: What Flying Around The Strait of Hormuz Cost\n"
-             f"{hormuz_months[0]} .. {hormuz_months[-1]}  ·  "
-             f"${tot_extra + tot_lost:,.0f} combined burden across "
-             f"{b2.airline.nunique()} carriers  ·  "
-             f"{int(b2.cancel_months.sum())} cancelled route-months",
-             fontsize=15, fontweight="bold", y=0.975)
+# ── Figure 10: Carrier Burden Breakdown (Panels a & b) ───────────────────────
+fig10 = plt.figure(figsize=(16.5, 7.5))
+gs10  = gridspec.GridSpec(1, 2, wspace=0.35, left=0.075, right=0.97, top=0.83, bottom=0.10)
+fig10.suptitle("Business2 (Part 1) — Strait of Hormuz Disruption: Airline Burden & Route Normalisation\n"
+               f"{hormuz_months[0]} .. {hormuz_months[-1]}  ·  "
+               f"${tot_extra + tot_lost:,.0f} combined burden across "
+               f"{b2.airline.nunique()} carriers  ·  "
+               f"{int(b2.cancel_months.sum())} cancelled route-months",
+               fontsize=14, fontweight="bold", y=0.97)
 
 # (a) absolute burden, stacked
-axa = fig.add_subplot(gs[0, 0])
+axa = fig10.add_subplot(gs10[0, 0])
 d = b2.sort_values("total_burden")
 yp = np.arange(len(d))
 axa.barh(yp, d.extra_fuel_usd, color="#e67e22", label="Extra fuel from detours")
@@ -435,7 +441,7 @@ for i, (_, r) in enumerate(d.iterrows()):
 axa.set_xlim(0, d.total_burden.max() * 1.22)
 
 # (b) route-count-normalised burden, split into its two mechanisms
-axb2 = fig.add_subplot(gs[0, 1])
+axb2 = fig10.add_subplot(gs10[0, 1])
 d2 = b2.sort_values("burden_per_rm")
 yp2 = np.arange(len(d2))
 axb2.barh(yp2, d2.fuel_per_rm, color="#e67e22", label="Extra fuel per route-month")
@@ -458,17 +464,31 @@ axb2.set_title(f"(b)  Normalised for route count the Gulf hubs are NOT worse off
                f"{100 - fuel_share_of_burden:.0f}% of the burden is lost revenue, not fuel",
                fontsize=11, fontweight="bold", pad=8)
 
+plt.savefig(f"{DATA_DIR}/fig10_reroute_cost.png", dpi=180, bbox_inches="tight")
+plt.close()
+print("\n  [Saved] fig10_reroute_cost.png")
+
+
+# ── Figure 11: Monthly Profile & Worst Detour Routes (Panels c & d) ──────────
+fig11 = plt.figure(figsize=(16.5, 7.5))
+gs11  = gridspec.GridSpec(1, 2, wspace=0.35, left=0.075, right=0.97, top=0.83, bottom=0.12)
+fig11.suptitle("Business2 (Part 2) — Strait of Hormuz Disruption: Monthly Timeline & Detour Hotspots\n"
+               f"Tracking cost dynamics and geographic impact across {hormuz_months[0]} .. {hormuz_months[-1]}",
+               fontsize=14, fontweight="bold", y=0.97)
+
 # (c) monthly profile
-axc = fig.add_subplot(gs[1, 0])
+axc = fig11.add_subplot(gs11[0, 0])
 xm = np.arange(len(monthly))
-axc.bar(xm - 0.19, monthly.extra_fuel, width=0.38, color="#e67e22",
+axc.bar(xm - 0.19, monthly.extra_fuel / 1e6, width=0.38, color="#e67e22",
         label="Extra fuel cost")
-axc.bar(xm + 0.19, monthly.lost_rev, width=0.38, color="#8e44ad",
+axc.bar(xm + 0.19, monthly.lost_rev / 1e6, width=0.38, color="#8e44ad",
         label="Lost revenue")
 axc.set_xticks(xm)
 axc.set_xticklabels(monthly.month, rotation=45, ha="right", fontsize=9)
-axc.set_ylabel("USD", fontsize=9.5)
+axc.set_ylabel("USD (Millions)", fontsize=9.5)
+axc.set_ylim(0, (monthly.lost_rev / 1e6).max() * 1.25)
 axm = axc.twinx()
+
 axm.plot(xm, monthly.cancels, color="#c0392b", marker="o", lw=2, ms=5,
          label="Cancelled route-months")
 axm.set_ylabel("Cancelled route-months", fontsize=9.5, color="#c0392b")
@@ -482,7 +502,7 @@ axc.set_title("(c)  Detours ran for all 7 months, but cancellations — 95% of t
               fontsize=11, fontweight="bold", pad=8)
 
 # (d) worst routes by detour
-axd = fig.add_subplot(gs[1, 1])
+axd = fig11.add_subplot(gs11[0, 1])
 rt = (win[win.is_reroute]
       .groupby(["airline", "origin_city", "destination_city"])
       .agg(extra_km=("extra_distance_km", "mean"),
@@ -500,16 +520,16 @@ axd.set_xlim(0, rt.extra_km.max() * 1.28)
 axd.set_title("(d)  Worst detours — the routes that physically had to fly around",
               fontsize=11, fontweight="bold", pad=8)
 
-plt.savefig(f"{DATA_DIR}/fig9_reroute_cost.png", dpi=180, bbox_inches="tight")
+plt.savefig(f"{DATA_DIR}/fig11_reroute_monthly_detours.png", dpi=180, bbox_inches="tight")
 plt.close()
-print("\n  [Saved] fig9_reroute_cost.png")
+print("\n  [Saved] fig11_reroute_monthly_detours.png")
 
 
 # ═════════════════════════════════════════════════════════════════════════════
-# B4.  BREAK-EVEN BRENT PRICE PER AIRLINE
+# Business3.  BREAK-EVEN BRENT PRICE PER AIRLINE
 # ═════════════════════════════════════════════════════════════════════════════
 print("\n" + "=" * 70)
-print("B4. WHAT IS THE BREAK-EVEN BRENT PRICE FOR EACH AIRLINE?")
+print("Business3. WHAT IS THE BREAK-EVEN BRENT PRICE FOR EACH AIRLINE?")
 print("=" * 70)
 
 # COVID is excluded: margin there was destroyed by collapsed revenue, not by fuel.
@@ -573,11 +593,11 @@ r_val, p_val = stats.pearsonr(val.breakeven, val.profit_margin_pct)
 print(f"\n  Validation: corr(break-even Brent, actual 2026-Q1 margin) = "
       f"{r_val:+.3f}  (p = {p_val:.4f}, n = {len(val)})")
 
-# ── Figure 11 ───────────────────────────────────────────────────────────────
+# ── Figure 12 ───────────────────────────────────────────────────────────────
 fig = plt.figure(figsize=(16.5, 10))
 gs  = gridspec.GridSpec(1, 2, width_ratios=[2.1, 1], wspace=0.20,
                         left=0.115, right=0.965, top=0.875, bottom=0.085)
-fig.suptitle("B4 — How High Can The Oil Price Go Before Each Airline Loses Money?",
+fig.suptitle("Business3 — How High Can The Oil Price Go Before Each Airline Loses Money?",
              fontsize=17, fontweight="bold", y=0.965)
 fig.text(0.5, 0.916,
          f"Each airline has a break-even Brent price. Below it they profit, above it they "
@@ -658,9 +678,9 @@ ax2.set_title("Does the break-even actually predict who bled?\n"
               f"Yes — the higher the break-even, the smaller the loss (r = {r_val:+.2f})",
               fontsize=11.5, fontweight="bold", pad=8)
 
-plt.savefig(f"{DATA_DIR}/fig11_breakeven_brent.png", dpi=180, bbox_inches="tight")
+plt.savefig(f"{DATA_DIR}/fig12_breakeven_brent.png", dpi=180, bbox_inches="tight")
 plt.close()
-print("\n  [Saved] fig11_breakeven_brent.png")
+print("\n  [Saved] fig12_breakeven_brent.png")
 
 
 # ═════════════════════════════════════════════════════════════════════════════
@@ -670,7 +690,7 @@ print("\n" + "=" * 70)
 print("KEY FINDINGS  -  BUSINESS ANALYSIS")
 print("=" * 70)
 
-print("\n  B1  HEDGING")
+print("\n  Business1  HEDGING")
 print(f"    1. Recorded hedge savings first appear in {first_nonzero}; they become")
 print(f"       material (>{MATERIAL:.0f}% of the fuel bill) in {first_material}, the Ukraine shock.")
 print(f"    2. Peak effect {peak_q.quarter}: {peak_q.savings_pct_fuel:.1f}% of the gross fuel bill,")
@@ -685,7 +705,7 @@ print("       industry's loss curve; it does not decide who wins.")
 print("    5. Caveat: savings are booked only when hedges are in the money, so the")
 print("       2019-2021H1 zeros are NOT an absence of hedging (avg ratio ~32%).")
 
-print("\n  B2  HORMUZ REROUTING")
+print("\n  Business2  HORMUZ REROUTING")
 print(f"    1. {len(hormuz_months)} disrupted months ({hormuz_months[0]} .. {hormuz_months[-1]}), "
       f"{int(b2.reroute_months.sum())} rerouted and")
 print(f"       {int(b2.cancel_months.sum())} cancelled route-months across {b2.airline.nunique()} carriers.")
@@ -710,7 +730,7 @@ print(f"       but cancellations collapsed from {int(monthly.cancels.max())}/mon
       f"{int(monthly.cancels.iloc[-1])} once de-escalation began in")
 print("       2026-04. The expensive half of the shock ended first.")
 
-print("\n  B4  BREAK-EVEN BRENT")
+print("\n  Business3  BREAK-EVEN BRENT")
 print(f"    1. Break-even Brent spans ${be.breakeven.min():.0f} - ${be.breakeven.max():.0f}/bbl "
       f"(median ${be.breakeven.median():.0f}).")
 print(f"    2. The hedge book buys a median +${be.hedge_uplift.median():.1f}/bbl of headroom; "
@@ -727,7 +747,8 @@ print(f"       far outside the observed ${be_src.brent_crude_usd_barrel.min():.0
       f"${be_src.brent_crude_usd_barrel.max():.0f}/bbl range.")
 
 print(f"\n  Figures saved to: {DATA_DIR}")
-for f in ["fig8_hedging_effectiveness.png", "fig9_reroute_cost.png",
-          "fig11_breakeven_brent.png"]:
+for f in ["fig8_hedging_timing.png", "fig9_hedging_impact.png",
+          "fig10_reroute_cost.png", "fig11_reroute_monthly_detours.png",
+          "fig12_breakeven_brent.png"]:
     print(f"    {f}")
 print()

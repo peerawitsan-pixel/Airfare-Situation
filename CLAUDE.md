@@ -12,13 +12,13 @@ transmit into global airfares, fuel surcharges, route economics and airline prof
 Coverage: **90 months (2019-01 .. 2026-06)**, 33 airlines, 5 regions, 39 geopolitical events,
 4 major shocks (COVID-19, Russia-Ukraine, Gaza-Israel, US-Iran / Strait of Hormuz).
 
-Two research questions are already implemented:
+Research questions implemented in the codebase:
 
-| Script | Question |
+| Script | Question / Scope |
 |---|---|
-| `Airfare-Situation/analysis.py` | **Q1** - How do oil shocks translate into ticket-price increases, and with what lag? |
-| `Airfare-Situation/analysis2.py` | **Q2** - Is pass-through consistent in rate and speed? How does the 2025-26 Iran crisis differ from 2020 and 2022? |
-| `analysis_bussiness.py` | **B1 / B2 / B4** - hedging effectiveness, Hormuz rerouting cost, break-even Brent. See `suggestion.md`. |
+| `analysis.py` | **Q1** - Transmission speed & lag structure<br>**Q3** - Event severity & immediate market impact |
+| `analysis2.py` | **Q2** - Pass-through rate consistency & crisis comparison<br>**Q4** - Airline business model & cost pass-through (FSC vs LCC) |
+| `analysis_bussiness.py` | **Business1 / Q5** - Fuel hedging timing, effectiveness & profit cushion<br>**Business2 / Q6** - Strait of Hormuz airspace disruption & rerouting economics<br>**Business3** - Airline break-even Brent crude prices & crisis headroom |
 
 ---
 
@@ -27,7 +27,7 @@ Two research questions are already implemented:
 ```
 C:\5001_FINAL\
 ├── path.py                       # single source of truth for the data directory
-├── analysis_bussiness.py         # B1/B2/B4 -> fig8, fig9, fig11
+├── analysis_bussiness.py         # Business1/Business2/Business3 -> fig8, fig9, fig10, fig11, fig12
 ├── CLAUDE.md                     # this file
 ├── suggestion.md                 # proposed business questions (Q3+), EN
 ├── suggestion_th.md              # same, Thai
@@ -62,7 +62,7 @@ never hard-code an absolute path.
 ```powershell
 python .\Airfare-Situation\analysis.py      # regenerates fig1..fig4
 python .\Airfare-Situation\analysis2.py     # regenerates fig5..fig7
-python .\analysis_bussiness.py              # regenerates fig8, fig9, fig11
+python .\analysis_bussiness.py              # regenerates fig8, fig9, fig10, fig11, fig12
 ```
 
 Dependencies: `pandas`, `numpy`, `matplotlib`, `seaborn`, `scipy`.
@@ -207,32 +207,33 @@ Cancellations appear in two windows only: 2022-03..2022-12 (Ukraine) and 2025-12
 
 All PNGs are written to `DATA_DIR` (`Airfare-Situation/`).
 
-**From `analysis.py` (Q1 - transmission speed and lag):**
+**From `analysis.py` (Q1 - transmission speed & lag; Q3 - event severity & immediate market impact):**
 
 | File | Content |
 |---|---|
 | `fig1_timeline_overview.png` | 3 stacked panels: Brent & jet-fuel prices; average total ticket price; month-over-month % change oil vs fare. Conflict phases shaded. |
 | `fig2_cross_correlation.png` | Cross-correlation of oil vs fare at lags 0-6 months, plus a scatter at the best lag. **Best lag = 0 months, r = 0.400.** |
-| `fig3_event_impact.png` | Average oil change vs immediate airfare change, grouped by conflict phase and event severity. |
+| `fig3_event_impact.png` | (Q3) Average oil change vs immediate airfare change, grouped by conflict phase and event severity. |
 | `fig4_phase_dashboard.png` | 4-panel phase dashboard: avg Brent, avg total fare, avg fuel surcharge, and an oil-vs-fare scatter across all months. |
 
-**From `analysis2.py` (Q2 - pass-through rate and crisis comparison):**
+**From `analysis2.py` (Q2 - pass-through rates & crisis comparison; Q4 - FSC vs LCC business model dynamics):**
 
 | File | Content |
 |---|---|
 | `fig5_three_shock_trajectories.png` | Indexed trajectories (T0 = 100) for COVID-19, Ukraine and Iran shocks, oil vs fare side by side. |
-| `fig6_pass_through_rates.png` | Oil shock vs fare response scatter per shock period, and cumulative pass-through at peak vs end. **Peak PTR: COVID 0.987, Ukraine 0.460, Iran 1.869.** |
+| `fig6_pass_through_rates.png` | (Q4) Oil shock vs fare response scatter per shock period, and cumulative pass-through at peak vs end (FSC vs LCC). **Peak PTR: COVID 0.987, Ukraine 0.460, Iran 1.869.** |
 | `fig7_iran_deepdive.png` | 6-panel Iran deep dive: absolute oil, ticket and surcharge levels; fuel cost as % of revenue; net profit margin by shock. |
 
-**From `analysis_bussiness.py` (B1 / B2 / B4 - business angles, see `suggestion.md`):**
+**From `analysis_bussiness.py` (Business1-3 / Q5-Q6 - business & operational angles):**
 
 | File | Content |
 |---|---|
-| `fig8_hedging_effectiveness.png` | Four panels, one question each: (a) WHEN does hedging pay (savings as % of the gross fuel bill per quarter, against Brent); (b) HOW MUCH margin it adds (cushion in pp); (c) 2026-Q1 with vs without hedging as a dumbbell; (d) does hedging more mean surviving better. **Savings start 2021-Q3, turn material 2022-Q2, peak 2026-Q1 at 25.3 % of the fuel bill (+8.1 pp of margin) — but the cross-airline correlation is ~zero.** |
-| `fig9_reroute_cost.png` | (a) absolute detour-fuel + lost-revenue burden by airline; (b) the same normalised per route-month, Gulf hubs marked; (c) monthly profile of detours vs cancellations; (d) worst detour routes. **$12.6 m combined burden, 95 % of it lost revenue, not fuel.** |
-| `fig11_breakeven_brent.png` | Dumbbell ranking: red dot = break-even without hedging, blue dot = with, bar length = headroom the hedge book bought; the loss-making zone at the 2026-Q1 price is shaded. Right panel validates the ranking against realised margin. **Break-even $107-$144/bbl, hedging buys a median +$12.8/bbl; only 4 of 25 airlines sat above the 2026-Q1 price (validation r = +0.87).** |
+| `fig8_hedging_timing.png` | (Business1 Part 1 / Q5) Timeline chart of quarterly money saved by hedging (% of gross fuel bill) against Brent crude price (2019-Q1 to 2026-Q1). **Savings start 2021-Q3, turn material 2022-Q2, peak 2026-Q1 at 25.3 % of fuel bill.** |
+| `fig9_hedging_impact.png` | (Business1 Part 2 / Q5) Three panels: (a) Margin points added by hedging over time (pp cushion); (b) 2026-Q1 with vs without hedging dumbbell comparison; (c) Cross-airline scatter plot of hedge ratio vs profit margin. **Margin cushion peaks at +8.1 pp in 2026-Q1, but cross-airline correlation is ~zero.** |
+| `fig10_reroute_cost.png` | (Business2 Part 1 / Q6) Strait of Hormuz disruption carrier burden: (a) absolute detour-fuel + lost-revenue burden by airline; (b) normalised per route-month, Gulf hubs marked. **$12.6 m combined burden, 95 % of it lost revenue, not fuel.** |
+| `fig11_reroute_monthly_detours.png` | (Business2 Part 2 / Q6) Strait of Hormuz disruption dynamics: (c) monthly profile of detours vs cancellations; (d) worst detour routes by extra distance. **Cancellations collapsed first, detours held flat for 7 months.** |
+| `fig12_breakeven_brent.png` | (Business3) Dumbbell ranking: red dot = break-even without hedging, blue dot = with, bar length = headroom the hedge book bought; loss-making zone shaded. Right panel validates ranking against realised margin. **Break-even $107-$144/bbl, hedging buys median +$12.8/bbl headroom.** |
 
-`fig10` is deliberately unused - it is reserved for B3 (FSC vs LCC), which is not implemented.
 
 **Not yet visualised:** load factor, refinery margin / crack spread, OPEC production,
 the SPR series, and the surcharge-band recovery slopes (B5).
