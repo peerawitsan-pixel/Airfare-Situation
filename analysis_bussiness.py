@@ -470,8 +470,8 @@ print("\n  [Saved] fig10_reroute_cost.png")
 
 
 # ── Figure 11: Monthly Profile & Worst Detour Routes (Panels c & d) ──────────
-fig11 = plt.figure(figsize=(16.5, 7.5))
-gs11  = gridspec.GridSpec(1, 2, wspace=0.35, left=0.075, right=0.97, top=0.83, bottom=0.12)
+fig11 = plt.figure(figsize=(17, 7.5))
+gs11  = gridspec.GridSpec(1, 2, width_ratios=[1, 1.25], wspace=0.45, left=0.065, right=0.97, top=0.83, bottom=0.12)
 fig11.suptitle("Business2 (Part 2) — Strait of Hormuz Disruption: Monthly Timeline & Detour Hotspots\n"
                f"Tracking cost dynamics and geographic impact across {hormuz_months[0]} .. {hormuz_months[-1]}",
                fontsize=14, fontweight="bold", y=0.97)
@@ -486,20 +486,26 @@ axc.bar(xm + 0.19, monthly.lost_rev / 1e6, width=0.38, color="#8e44ad",
 axc.set_xticks(xm)
 axc.set_xticklabels(monthly.month, rotation=45, ha="right", fontsize=9)
 axc.set_ylabel("USD (Millions)", fontsize=9.5)
-axc.set_ylim(0, (monthly.lost_rev / 1e6).max() * 1.25)
+axc.set_ylim(0, (monthly.lost_rev / 1e6).max() * 1.30)
 axm = axc.twinx()
 
 axm.plot(xm, monthly.cancels, color="#c0392b", marker="o", lw=2, ms=5,
          label="Cancelled route-months")
-axm.set_ylabel("Cancelled route-months", fontsize=9.5, color="#c0392b")
+axm.set_ylabel("")  # Clear vertical label to avoid colliding with panel (d) labels
 axm.tick_params(axis="y", labelcolor="#c0392b")
+axm.set_ylim(0, monthly.cancels.max() * 1.25)
 axm.grid(False)
+
+# Place the red axis indicator cleanly inside panel (c) plot area top-right
+axc.text(0.98, 0.88, "Cancelled route-months (right axis) →", transform=axc.transAxes,
+         color="#c0392b", fontweight="bold", fontsize=8.5, ha="right", va="top")
+
 h1, l1 = axc.get_legend_handles_labels()
 h2, l2 = axm.get_legend_handles_labels()
-axc.legend(h1 + h2, l1 + l2, fontsize=8.5, loc="upper right", framealpha=0.92)
+axc.legend(h1 + h2, l1 + l2, fontsize=8.5, loc="upper right", framealpha=0.94)
 axc.set_title("(c)  Detours ran for all 7 months, but cancellations — 95% of the cost —\n"
               "stopped the moment de-escalation began in 2026-04",
-              fontsize=11, fontweight="bold", pad=8)
+              fontsize=11, fontweight="bold", pad=10)
 
 # (d) worst routes by detour
 axd = fig11.add_subplot(gs11[0, 1])
@@ -511,12 +517,12 @@ rt["label"] = rt.origin_city + " → " + rt.destination_city + "  (" + rt.airlin
 rt = rt.sort_values("extra_km", ascending=False).head(12).sort_values("extra_km")
 axd.barh(np.arange(len(rt)), rt.extra_km, color="#16a085", alpha=0.9)
 axd.set_yticks(np.arange(len(rt)))
-axd.set_yticklabels(rt.label, fontsize=8)
+axd.set_yticklabels(rt.label, fontsize=8.5)
 axd.set_xlabel("Average extra distance per flight (km)", fontsize=9.5)
 for i, (_, r) in enumerate(rt.iterrows()):
     axd.text(r.extra_km * 1.01, i, f"+${r.extra_usd:,.0f}/flt", va="center",
-             fontsize=7.5, color="#333333")
-axd.set_xlim(0, rt.extra_km.max() * 1.28)
+             fontsize=8, color="#333333")
+axd.set_xlim(0, rt.extra_km.max() * 1.22)
 axd.set_title("(d)  Worst detours — the routes that physically had to fly around",
               fontsize=11, fontweight="bold", pad=8)
 
@@ -594,16 +600,16 @@ print(f"\n  Validation: corr(break-even Brent, actual 2026-Q1 margin) = "
       f"{r_val:+.3f}  (p = {p_val:.4f}, n = {len(val)})")
 
 # ── Figure 12 ───────────────────────────────────────────────────────────────
-fig = plt.figure(figsize=(16.5, 10))
-gs  = gridspec.GridSpec(1, 2, width_ratios=[2.1, 1], wspace=0.20,
-                        left=0.115, right=0.965, top=0.875, bottom=0.085)
+fig = plt.figure(figsize=(17, 10.5))
+gs  = gridspec.GridSpec(1, 2, width_ratios=[2.1, 1], wspace=0.22,
+                        left=0.12, right=0.965, top=0.83, bottom=0.085)
 fig.suptitle("Business3 — How High Can The Oil Price Go Before Each Airline Loses Money?",
-             fontsize=17, fontweight="bold", y=0.965)
-fig.text(0.5, 0.916,
+             fontsize=16, fontweight="bold", y=0.975)
+fig.text(0.5, 0.925,
          f"Each airline has a break-even Brent price. Below it they profit, above it they "
          f"lose. In {peak_name} Brent was \\${BRENT_NOW:.0f} — "
          f"only {len(survivors)} of {len(be)} airlines were above water.",
-         ha="center", fontsize=12, color="#333333")
+         ha="center", fontsize=11.5, color="#333333")
 
 ax1 = fig.add_subplot(gs[0, 0])
 d = be.sort_values("breakeven")
@@ -636,23 +642,32 @@ for tick, bev in zip(ax1.get_yticklabels(), d.breakeven):
         tick.set_fontweight("bold")
 
 ax1.set_xlabel("Brent crude price at which the airline breaks even  ($/bbl)", fontsize=10.5)
-ax1.set_xlim(80, max(d.breakeven.max() * 1.10, BRENT_PEAK * 1.03))
-ax1.set_ylim(-0.9, len(d) - 0.1)
+ax1.set_xlim(80, max(d.breakeven.max() * 1.12, BRENT_PEAK * 1.03))
+ax1.set_ylim(-0.8, len(d) + 1.3)
 ax1.legend(fontsize=9, loc="lower right", framealpha=0.96)
-# Both labels ride next to the blue dot, so they never cross the 2026-Q1 line.
-for i, (_, r) in enumerate(d.iterrows()):
-    ax1.text(r.breakeven + 1.4, i, f"\\${r.breakeven:.0f}", va="center", fontsize=8.5,
-             fontweight="bold", color=C_HEDGE)
-    ax1.text(r.breakeven + 8.0, i, f"+\\${r.hedge_uplift:.0f}", va="center",
-             fontsize=8, color="#7f8c8d")
 
-ax1.text(BRENT_NOW - 1.5, len(d) - 0.55, "LOSS-MAKING at the 2026-Q1 price  ←",
-         ha="right", va="center", fontsize=10, fontweight="bold", color=C_NOHEDGE)
-ax1.text(BRENT_NOW + 1.5, len(d) - 0.55, "→  STILL PROFITABLE",
-         ha="left", va="center", fontsize=10, fontweight="bold", color="#1a7a3c")
-ax1.set_title("Longer bar = more protection bought by hedging      "
-              "(blue = break-even, grey +\\$ = extra headroom the hedge book bought)",
-              fontsize=11, fontweight="bold", pad=8)
+# Labels next to each dumbbell bar:
+for i, (_, r) in enumerate(d.iterrows()):
+    txt = f"\\${r.breakeven:.0f} (+\\${r.hedge_uplift:.0f})"
+    x_pos = r.breakeven + 1.6
+    # If text is near BRENT_NOW line ($131), add a translucent white box to avoid vertical line overlap
+    if abs(x_pos - BRENT_NOW) < 6:
+        bbox_style = dict(boxstyle="round,pad=0.15", fc="white", ec="none", alpha=0.9)
+    else:
+        bbox_style = None
+    
+    ax1.text(x_pos, i, txt, va="center", fontsize=8.2, fontweight="bold",
+             color=C_HEDGE, bbox=bbox_style, zorder=6)
+
+# Status indicators above the top bar (outside data area, cleanly separated)
+ax1.text(BRENT_NOW - 3.0, len(d) + 0.50, "LOSS-MAKING at 2026-Q1 price  ←",
+         ha="right", va="center", fontsize=9.5, fontweight="bold", color=C_NOHEDGE)
+ax1.text(BRENT_NOW + 3.0, len(d) + 0.50, "→  STILL PROFITABLE",
+         ha="left", va="center", fontsize=9.5, fontweight="bold", color="#1a7a3c")
+
+ax1.set_title("(a) Longer bar = more protection bought by hedging\n"
+              "(blue = break-even, +\\$ = extra headroom bought by hedge book)",
+              fontsize=11.5, fontweight="bold", pad=8)
 
 ax2 = fig.add_subplot(gs[0, 1])
 for t, c in [("Flag Carrier", C_FSC), ("Low Cost", C_LCC)]:
@@ -665,17 +680,29 @@ ax2.plot(xs, sl * xs + ic, color="#333333", ls="--", lw=1.6,
          label=f"trend  (r = {r_val:+.2f})")
 ax2.axvline(BRENT_NOW, color="black", lw=2, ls="--")
 ax2.axhline(0, color="black", lw=1)
+
+# Specific non-overlapping offsets for panel (b) key data points:
+custom_offsets = {
+    "United Airlines": (8, -2),
+    "Air Arabia": (8, -14),
+    "flynas": (8, -4),
+    "Singapore Airlines": (-80, 4),
+    "Air France": (-55, 6),
+    "Air India": (8, -12),
+}
+
 lab2 = pd.concat([val[val.breakeven > BRENT_NOW],
                   val.nsmallest(2, "profit_margin_pct")]).drop_duplicates("airline")
-for k, (_, r) in enumerate(lab2.sort_values("breakeven").iterrows()):
-    dy = 7 if k % 2 == 0 else -13
-    ax2.annotate(r.airline, (r.breakeven, r.profit_margin_pct), xytext=(6, dy),
-                 textcoords="offset points", fontsize=8.5)
+for _, r in lab2.iterrows():
+    offset = custom_offsets.get(r.airline, (6, 4))
+    ax2.annotate(r.airline, (r.breakeven, r.profit_margin_pct), xytext=offset,
+                 textcoords="offset points", fontsize=8.5, fontweight="bold" if r.breakeven > BRENT_NOW else "normal")
+
 ax2.set_xlabel("Break-even Brent ($/bbl)", fontsize=10)
 ax2.set_ylabel(f"Actual net margin in {peak_name} (%)", fontsize=10)
 ax2.legend(fontsize=9, loc="upper left", framealpha=0.94)
-ax2.set_title("Does the break-even actually predict who bled?\n"
-              f"Yes — the higher the break-even, the smaller the loss (r = {r_val:+.2f})",
+ax2.set_title("(b) Validation against actual 2026-Q1 margin\n"
+              f"Higher break-even = smaller loss (r = {r_val:+.2f})",
               fontsize=11.5, fontweight="bold", pad=8)
 
 plt.savefig(f"{DATA_DIR}/fig12_breakeven_brent.png", dpi=180, bbox_inches="tight")
