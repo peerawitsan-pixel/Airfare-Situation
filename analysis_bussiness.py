@@ -125,6 +125,13 @@ pk["sav_pct_fuel"] = pk.hedge_savings_usd_m / pk.fuel_cost_usd_m * 100
 pk = pk.sort_values("fuel_hedging_pct", ascending=False)
 r_pk, p_pk = stats.pearsonr(pk.fuel_hedging_pct, pk.profit_margin_pct)
 
+# Cross-airline variation in how much hedging cushions margin in the peak quarter.
+# This is useful context for Fig. 9: the industry average is meaningful, but the
+# benefit is not identical for every airline.
+peak_cushion_mean = pk["hedge_gain_pct_rev"].mean()
+peak_cushion_sd   = pk["hedge_gain_pct_rev"].std(ddof=1)
+peak_cushion_n    = pk["hedge_gain_pct_rev"].count()
+
 print(f"\n  {peak_name} cross-section  (hedge ratio vs realised margin)")
 print(f"    corr(hedge_ratio, margin)      = {r_pk:+.3f}  (p = {p_pk:.3f})")
 print(f"    corr(hedge_ratio, sav %fuel)   = "
@@ -233,6 +240,13 @@ ax2.annotate(f"+{q.margin_cushion.iloc[i_pk]:.1f} pp",
              xytext=(i_pk - 9.5, q.margin_cushion.max() * 0.86), fontsize=11.5,
              fontweight="bold", color=C_DARK, va="center",
              arrowprops=dict(arrowstyle="->", color=C_DARK, lw=1.4))
+ax2.text(
+    0.98, 0.94,
+    f"Peak-quarter cross-airline variation:\n"
+    f"mean = +{peak_cushion_mean:.1f} pp, SD = {peak_cushion_sd:.1f} pp (n={peak_cushion_n})",
+    transform=ax2.transAxes, ha="right", va="top", fontsize=8.8, color="#555555",
+    bbox=dict(boxstyle="round,pad=0.35", fc="white", ec="#cccccc", alpha=0.92),
+)
 calm = q[(q.margin_cushion > 0) & (q.quarter != peak_name)].margin_cushion.mean()
 ax2.axhline(calm, color="#555555", ls="--", lw=1.2)
 ax2.text(0.3, calm + 0.18, f"every other quarter: about +{calm:.1f} pp",
