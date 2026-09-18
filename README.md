@@ -121,7 +121,7 @@
 <a id="fig2"></a>
 ### Figure 2: การวิเคราะห์ความสัมพันธ์ไขว้และระยะเวลาส่งผ่าน (Lag & Cross-Correlation Analysis)
 ![Figure 2: Cross Correlation Analysis](fig2_cross_correlation.png)
-* [fig2_cross_correlation.png](file:///c:/Users/P/oil%20situation/fig2_cross_correlation.png)
+* [ภาพที่ 2: การวิเคราะห์ความหน่วงเวลา (Time-Lag Analysis) และความสัมพันธ์ระหว่างอัตราการเปลี่ยนแปลงราคาน้ำมันดิบกับราคาตั๋วเครื่องบิน (แสดงค่าสัมประสิทธิ์สหสัมพันธ์ ณ ช่วงเดือนเหลื่อมต่างๆ (Lag 0 ถึง Lag 8) เพื่อวัดความเร็วในการส่งผ่านราคา ร่วมกับแผนภาพการกระจายความสัมพันธ์ในเดือนเดียวกัน)](file:///c:/Users/P/oil%20situation/fig2_cross_correlation.png)
 
 **ข้อสรุปสำคัญ (Key Takeaways):**
 
@@ -140,7 +140,7 @@
 <a id="fig3"></a>
 ### Figure 3: ผลกระทบตามความรุนแรงของเหตุการณ์และความขัดแย้ง (Impact by Event Severity & Conflict Phase)
 ![Figure 3: Event Impact Breakdown](fig3_event_impact.png)
-* [fig3_event_impact.png](file:///c:/Users/P/oil%20situation/fig3_event_impact.png)
+* [ภาพที่ 3: ความสัมพันธ์ระหว่างขนาดผลกระทบจากราคาน้ำมันดิบกับอัตราการปรับราคาตั๋วเครื่องบินในทันที จำแนกตามระดับความรุนแรงของเหตุการณ์ภูมิรัฐศาสตร์ (แสดงผลกระทบโดยทันทีของเปอร์เซ็นต์การเปลี่ยนแปลงราคาน้ำมันดิบ ณ วันเกิดเหตุการณ์ ต่ออัตราการปรับขึ้นราคาตั๋วเครื่องบิน จำแนกตามระดับความรุนแรงของวิกฤต)](file:///c:/Users/P/oil%20situation/fig3_event_impact.png)
 
 **ข้อสรุปสำคัญ (Key Takeaways):**
 - กราฟแท่งคู่แสดงเปรียบเทียบ % การเปลี่ยนแปลงเฉลี่ยของราคาน้ำมัน (แท่งทึบ) กับ % ผลกระทบต่อราคาตั๋ว (แท่งลาย/สีอ่อน) ในแต่ละช่วงความขัดแย้ง
@@ -152,7 +152,7 @@
 <a id="fig4"></a>
 ### Figure 4: แดชบอร์ดสรุปราคาตั๋วและราคาน้ำมันรายเหตุการณ์วิกฤต (Oil vs. Airfare: Phase Analysis Dashboard)
 ![Figure 4: Macro Phase Dashboard](fig4_phase_dashboard.png)
-* [fig4_phase_dashboard.png](file:///c:/Users/P/oil%20situation/fig4_phase_dashboard.png)
+* [ภาพที่ 4: การเปรียบเทียบค่าเฉลี่ยราคาน้ำมันดิบ ราคาตั๋วเครื่องบิน และค่าธรรมเนียมน้ำมัน จำแนกตามช่วงวิกฤตการณ์ภูมิรัฐศาสตร์ (แสดงการเปรียบเทียบระดับราคาน้ำมันดิบ Brent, ราคาตั๋วเครื่องบินรวม และค่าธรรมเนียมน้ำมันเฉลี่ยใน 9 ช่วงเหตุการณ์ พร้อมแผนภาพความสัมพันธ์ภาพรวม)](file:///c:/Users/P/oil%20situation/fig4_phase_dashboard.png)
 
 **ข้อสรุปสำคัญ (Key Takeaways):**
 
@@ -188,7 +188,7 @@
 <a id="fig5"></a>
 ### Figure 5: การเปรียบเทียบผลกระทบจาก 3 เหตุการณ์ใหญ่ ช่วงโควิด19, สงครามรัสเซีย-ยูเครน และสงครามอิหร่าน ($T_0=100$) (Three-Shock Trajectory Comparison)
 ![Figure 5: Three Shock Trajectories](fig5_three_shock_trajectories.png)
-* [fig5_three_shock_trajectories.png](file:///c:/Users/P/oil%20situation/fig5_three_shock_trajectories.png)
+* [ภาพที่ 5: การเปรียบเทียบเส้นทางพัฒนาการของราคาน้ำมันดิบและราคาตั๋วเครื่องบิน ใน 3 วิกฤตการณ์หลัก (ปี 2020–2026) (แสดงเปรียบเทียบดัชนีการเปลี่ยนแปลงราคาน้ำมันดิบและราคาตั๋วเครื่องบินตั้งแต่จุดเริ่มต้นวิกฤต (T0) ระหว่างวิกฤตโควิด-19, สงครามยูเครน และสงครามอิหร่าน)](file:///c:/Users/P/oil%20situation/fig5_three_shock_trajectories.png)
 
 **ข้อสรุปสำคัญ (Key Takeaways):**
 
@@ -204,7 +204,7 @@
 <a id="fig6"></a>
 ### Figure 6: อัตราการส่งผ่านราคา (Pass-Through Rates)
 ![Figure 6: Pass-Through Rates](fig6_pass_through_rates.png)
-* [fig6_pass_through_rates.png](file:///c:/Users/P/oil%20situation/fig6_pass_through_rates.png)
+* [ภาพที่ 6: การเปรียบเทียบอัตราการส่งผ่านต้นทุนราคาน้ำมันสู่ราคาตั๋วเครื่องบิน (Pass-Through Rate) ใน 3 วิกฤตการณ์หลัก (แสดงอัตราส่วนการส่งผ่านราคา (สัดส่วน % การเปลี่ยนแปลงราคาตั๋ว ต่อ % การเปลี่ยนแปลงราคาน้ำมันดิบ) เพื่อเปรียบเทียบความรุนแรงในการส่งผ่านราคาในแต่ละวิกฤต)](file:///c:/Users/P/oil%20situation/fig6_pass_through_rates.png)
 
 **ข้อสรุปสำคัญ (Key Takeaways):**
 
@@ -230,7 +230,7 @@
 <a id="fig7"></a>
 ### Figure 7: เจาะลึกวิกฤตการณ์ช่วงโควิด19, สงครามรัสเซีย-ยูเครน และสงครามอิหร่าน (Covid-19, Russia-Ukraine and Iran Crisis Deep Dive)
 ![Figure 7: Iran Crisis Deep Dive](fig7_iran_deepdive.png)
-* [fig7_iran_deepdive.png](file:///c:/Users/P/oil%20situation/fig7_iran_deepdive.png)
+* [ภาพที่ 7: การวิเคราะห์เชิงลึกโครงสร้างต้นทุนน้ำมัน อัตรากำไรสุทธิ และผลกระทบต่อราคาตั๋วเครื่องบิน ในวิกฤตการณ์สงครามสหรัฐฯ-อิหร่าน (ปี 2025–2026) (แสดงความสัมพันธ์ระหว่างราคาน้ำมันดิบพุ่งสูง สัดส่วนค่าน้ำมันต่อรายได้ อัตรากำไรสุทธิอุตสาหกรรม และการพุ่งกระชากของค่าธรรมเนียมน้ำมัน)](file:///c:/Users/P/oil%20situation/fig7_iran_deepdive.png)
 
 **ข้อสรุปสำคัญ (Key Takeaways):**
 
@@ -264,7 +264,7 @@ Iran Crisis (สีแดง): ทะลุ $515 ในเดือนที่ 
 <a id="fig8"></a>
 ### Figure 8: ผลลัพธ์จากการประกันราคาน้ำมัน (Fuel Hedging Timing & Savings)
 ![Figure 8: Fuel Hedging Timing](fig8_hedging_timing.png)
-* [fig8_hedging_timing.png](file:///c:/Users/P/oil%20situation/fig8_hedging_timing.png)
+* [ภาพที่ 8: ความสัมพันธ์ระหว่างราคาน้ำมันดิบ Brent กับสัดส่วนเงินประหยัดจากการทำประกันความเสี่ยงราคาน้ำมัน (Fuel Hedging Savings) (แสดงสัดส่วนเงินที่ประหยัดได้จากการทำประกันราคาน้ำมันเทียบกับค่าน้ำมันรวมรายไตรมาส เพื่อวิเคราะห์ช่วงเวลาที่การทำประกันราคาน้ำมันเริ่มส่งผลคุ้มค่า)](file:///c:/Users/P/oil%20situation/fig8_hedging_timing.png)
 
 **ข้อสรุปสำคัญ (Key Takeaways):**
 
@@ -282,7 +282,7 @@ Iran Crisis (สีแดง): ทะลุ $515 ในเดือนที่ 
 <a id="fig9"></a>
 ### Figure 9: ผลกระทบจากการประกันราคาน้ำมันต่ออัตรากำไรสุทธิ (Hedging Impact & Margin Cushion)
 ![Figure 9: Hedging Impact](fig9_hedging_impact.png)
-* [fig9_hedging_impact.png](file:///c:/Users/P/oil%20situation/fig9_hedging_impact.png)
+* [ภาพที่ 9: ผลกระทบของการทำประกันความเสี่ยงราคาน้ำมันต่ออัตรากำไรสุทธิ และความสัมพันธ์ระหว่างสัดส่วนการทำประกันราคาน้ำมัน กับผลประกอบการรายสายการบิน (แสดงเปอร์เซ็นต์พอยต์ของอัตรากำไรสุทธิที่เพิ่มขึ้นจากการทำประกันราคาน้ำมัน ร่วมกับการเปรียบเทียบสัดส่วนการทำประกันราคาน้ำมัน กับอัตรากำไรสุทธิในไตรมาสวิกฤต)](file:///c:/Users/P/oil%20situation/fig9_hedging_impact.png)
 
 ภาพรวมการทำ Fuel Hedging สายการบินส่วนใหญ่แทบ ไม่เห็นผลเลยในภาวะปกติ แต่จะเริ่มเห็นผลประหยัดเงินอย่างมีนัยสำคัญเมื่อเกิดวิกฤตราคาน้ำมันดิบพุ่งสูง (In the money) โดยคุ้มค่าสูงสุดใน ไตรมาส 1 ปี 2026 (วิกฤตอิหร่าน) ช่วยเซฟอัตรากำไรสุทธิขึ้นมาได้ถึง +8.1 percentage points (pp)
 
@@ -311,7 +311,7 @@ Iran Crisis (สีแดง): ทะลุ $515 ในเดือนที่ 
 <a id="fig10"></a>
 ### Figure 10: โครงสร้างภาระต้นทุนจากผลกระทบการปิดช่องแคบฮอร์มุซ ส่วนที่ 1 (Strait of Hormuz Carrier Burden Breakdown Part 1)
 ![Figure 10: Hormuz Carrier Burden](fig10_reroute_cost.png)
-* [fig10_reroute_cost.png](file:///c:/Users/P/oil%20situation/fig10_reroute_cost.png)
+* [ภาพที่ 10: การเปรียบเทียบมูลค่าภาระความเสียหายระหว่างรายได้ที่สูญเสียจากการยกเลิกเที่ยวบินกับค่าน้ำมันจากการบินอ้อม ในวิกฤตการณ์ช่องแคบฮอร์มุซ (แสดงมูลค่าความเสียหายรวมเชิงปฏิบัติการและค่าเฉลี่ยต่อเส้นทางบิน จำแนกตามรายได้ที่สูญเสียจากการยกเลิกเที่ยวบินเทียบกับต้นทุนค่าน้ำมันจากการบินอ้อมน่านฟ้า)](file:///c:/Users/P/oil%20situation/fig10_reroute_cost.png)
 
 **ข้อสรุปสำคัญ (Key Takeaways):**
 
@@ -345,7 +345,7 @@ Iran Crisis (สีแดง): ทะลุ $515 ในเดือนที่ 
 <a id="fig11"></a>
 ### Figure 11: โครงสร้างภาระต้นทุนจากผลกระทบการปิดช่องแคบฮอร์มุซ ส่วนที่ 2 (Strait of Hormuz Carrier Burden Breakdown Part 2)
 ![Figure 11: Hormuz Monthly Profile & Detours](fig11_reroute_monthly_detours.png)
-* [fig11_reroute_monthly_detours.png](file:///c:/Users/P/oil%20situation/fig11_reroute_monthly_detours.png)
+* [ภาพที่ 11: แนวโน้มความเสียหายรายเดือนจากการยกเลิกเที่ยวบิน และการจัดอันดับเส้นทางบินที่ได้รับผลกระทบจากการบินอ้อมน่านฟ้า (แสดงจำนวนเส้นทางบินที่ถูกยกเลิกและมูลค่าความเสียหายรายเดือน ร่วมกับการจัดอันดับเส้นทางบินที่ต้องบินอ้อมระยะทางไกลที่สุดและต้นทุนค่าน้ำมันที่เพิ่มขึ้นต่อเที่ยวบิน)](file:///c:/Users/P/oil%20situation/fig11_reroute_monthly_detours.png)
 
 **ข้อสรุปสำคัญ (Key Takeaways):**
 
@@ -370,7 +370,7 @@ Iran Crisis (สีแดง): ทะลุ $515 ในเดือนที่ 
 <a id="fig12"></a>
 ### Figure 12: ราคาน้ำมันดิบและจุดคุ้มทุนของสายการบิน (Airline Break-Even Brent Prices)
 ![Figure 12: Break-Even Brent Prices](fig12_breakeven_brent.png)
-* [fig12_breakeven_brent.png](file:///c:/Users/P/oil%20situation/fig12_breakeven_brent.png)
+* [ภาพที่ 12: การวิเคราะห์จุดคุ้มทุนราคาน้ำมันดิบ Brent (Break-Even Brent Price) และความสัมพันธ์ต่ออัตรากำไรสุทธิของ 25 สายการบิน (แสดงจุดคุ้มทุนราคาน้ำมันดิบก่อนและหลังการทำประกันราคาน้ำมันของแต่ละสายการบินเทียบกับราคาน้ำมันจริงในไตรมาสวิกฤต ร่วมกับความสัมพันธ์ต่ออัตรากำไรสุทธิ)](file:///c:/Users/P/oil%20situation/fig12_breakeven_brent.png)
 
 **ข้อสรุปสำคัญ (Key Takeaways):**
 
