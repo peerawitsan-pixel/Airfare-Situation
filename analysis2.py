@@ -478,36 +478,77 @@ shock_fin = {
     "Ukraine War":  {"start": "2022-03", "end": "2022-12"},
     "Iran Crisis":  {"start": "2025-12", "end": "2026-06"},
 }
-baseline_fin = financial[
-    (financial.month >= "2019-01") & (financial.month <= "2019-12")
-]["fuel_cost_pct_revenue"].mean()
 
-fin_vals = {"Baseline\n(2019)": baseline_fin}
-for label2, rng in shock_fin.items():
-    sub = financial[(financial.month >= rng["start"]) & (financial.month <= rng["end"])]
-    fin_vals[label2] = sub["fuel_cost_pct_revenue"].mean()
+# For the bottom-row comparisons, first average each airline within a period,
+# then calculate the mean and SD across airlines.  This gives every airline
+# equal weight even though the crisis windows contain different numbers of
+# quarters/months.
+def airline_period_stats(df, start, end, column):
+    sub = df[(df.month >= start) & (df.month <= end)].copy()
+    per_airline = sub.groupby("airline")[column].mean()
+    return {
+        "mean": per_airline.mean(),
+        "sd": per_airline.std(ddof=1),
+        "n": per_airline.size,
+    }
+
+periods_fin = {
+    "Baseline\n(2019)": {"start": "2019-01", "end": "2019-12"},
+    **shock_fin,
+}
+
+fuel_stats = {
+    label2: airline_period_stats(financial, rng["start"], rng["end"], "fuel_cost_pct_revenue")
+    for label2, rng in periods_fin.items()
+}
+
+margin_stats = {
+    label2: airline_period_stats(financial, rng["start"], rng["end"], "profit_margin_pct")
+    for label2, rng in periods_fin.items()
+}
+
+fin_vals = {k: v["mean"] for k, v in fuel_stats.items()}
+fin_sds  = {k: v["sd"]   for k, v in fuel_stats.items()}
 
 # (1, 0:3) Financial impact: fuel cost % of revenue during each shock
 ax5 = fig.add_subplot(gs[1, 0:3])
 cols5 = ["#4CAF50", "#9C27B0", "#FF5722", "#F44336"]
-bars5 = ax5.bar(list(fin_vals.keys()), list(fin_vals.values()), color=cols5, alpha=0.88, edgecolor="white", linewidth=1.2)
+bars5 = ax5.bar(
+    list(fin_vals.keys()),
+    list(fin_vals.values()),
+    yerr=list(fin_sds.values()),
+    capsize=5,
+    color=cols5,
+    alpha=0.88,
+    edgecolor="white",
+    linewidth=1.2,
+    error_kw=dict(ecolor="#444444", elinewidth=1.4, capthick=1.4),
+)
 for bar, v in zip(bars5, fin_vals.values()):
     ax5.text(bar.get_x() + bar.get_width() / 2, bar.get_height() + 0.6,
              f"{v:.1f}%", ha="center", va="bottom", fontsize=9.5, fontweight="bold", color="#222222")
 ax5.grid(True, axis="y", linestyle=":", alpha=0.4, color="gray")
 ax5.set_ylabel("Avg Fuel Cost % of Revenue", fontsize=9.5, fontweight="bold", labelpad=8)
 ax5.set_title("Airline Cost Pressure (Fuel Cost as % of Revenue)", fontsize=11, fontweight="bold", pad=10)
-ax5.set_ylim(0, 42)
+ax5.set_ylim(0, max(v["mean"] + v["sd"] for v in fuel_stats.values()) * 1.12)
 
 # (1, 3:6) Profit margin during each shock
 ax6 = fig.add_subplot(gs[1, 3:6])
-margin_vals = {"Baseline\n(2019)": financial[(financial.month >= "2019-01") & (financial.month <= "2019-12")]["profit_margin_pct"].mean()}
-for label2, rng in shock_fin.items():
-    sub = financial[(financial.month >= rng["start"]) & (financial.month <= rng["end"])]
-    margin_vals[label2] = sub["profit_margin_pct"].mean()
+margin_vals = {k: v["mean"] for k, v in margin_stats.items()}
+margin_sds  = {k: v["sd"]   for k, v in margin_stats.items()}
 
 cols6 = ["#4CAF50", "#9C27B0", "#FF5722", "#F44336"]
-bars6 = ax6.bar(list(margin_vals.keys()), list(margin_vals.values()), color=cols6, alpha=0.88, edgecolor="white", linewidth=1.2)
+bars6 = ax6.bar(
+    list(margin_vals.keys()),
+    list(margin_vals.values()),
+    yerr=list(margin_sds.values()),
+    capsize=5,
+    color=cols6,
+    alpha=0.88,
+    edgecolor="white",
+    linewidth=1.2,
+    error_kw=dict(ecolor="#444444", elinewidth=1.4, capthick=1.4),
+)
 for bar, v in zip(bars6, margin_vals.values()):
     if v >= 0:
         ax6.text(bar.get_x() + bar.get_width() / 2, bar.get_height() + 0.5,
@@ -521,9 +562,19 @@ ax6.axhline(0, color="black", lw=0.8, ls="--")
 ax6.grid(True, axis="y", linestyle=":", alpha=0.4, color="gray")
 ax6.set_ylabel("Avg Profit Margin (%)", fontsize=9.5, fontweight="bold", labelpad=8)
 ax6.set_title("Airline Profitability (Net Profit Margin by Shock)", fontsize=11, fontweight="bold", pad=10)
-ax6.set_ylim(-36, 14)
+ax6.set_ylim(
+    min(v["mean"] - v["sd"] for v in margin_stats.values()) - 2,
+    max(v["mean"] + v["sd"] for v in margin_stats.values()) + 2,
+)
 
-plt.tight_layout(rect=[0.01, 0, 0.99, 0.91])
+# One note for both bottom panels is enough; no need to repeat it on every bar.
+fig.text(
+    0.5, 0.015,
+    "Bottom-row bars = mean across airlines; error bars = ±1 SD across airlines (n = 25 per period)",
+    ha="center", va="bottom", fontsize=9, color="#555555", style="italic",
+)
+
+plt.tight_layout(rect=[0.01, 0.04, 0.99, 0.91])
 plt.savefig(f"{DATA_DIR}/fig7_iran_deepdive.png", dpi=200, bbox_inches="tight")
 plt.close()
 print("[Saved] fig7_iran_deepdive.png")
