@@ -1,3 +1,5 @@
 suggestion*.md
 __pycache__/
 *.pyc
+CLAUDE.md
+LIBRARY_USAGE.md
