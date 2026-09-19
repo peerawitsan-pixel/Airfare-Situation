@@ -16,9 +16,7 @@ Approach:
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib.patches as mpatches
 import matplotlib.gridspec as gridspec
-import matplotlib.dates as mdates
 from scipy import stats
 import warnings
 warnings.filterwarnings("ignore")
